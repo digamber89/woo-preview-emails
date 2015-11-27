@@ -12,6 +12,7 @@ Text Domain: woocommerce-preview-emails
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
 if( !function_exists('is_woocommerce_active') ){
 	require_once('includes/woo-functions.php');
 }
