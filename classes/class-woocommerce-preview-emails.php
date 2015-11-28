@@ -68,8 +68,12 @@ class WooCommercePreviewEmails{
 		<style><?php wc_get_template( 'emails/email-styles.php' ); ?></style>
 		<?php
 		 	wc_get_template( 'emails/email-header.php', $args );
-	 	 	wc_get_template( $template, array( 'order' => $order ) );
-		 	wc_get_template( 'emails/email-footer.php' ); 
+	 	 	wc_get_template( $template, array( 
+	 	 		'order' => $order,
+	 	 		'email_heading'=> $args['email_heading'],
+	 	 		 )
+	 	 	);
+		 	wc_get_template( 'emails/email-footer.php' );
 		}
 	}
 
