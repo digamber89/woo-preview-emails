@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce Preview Emails
-Description: An Extension for WooCommerce that lets you Preview Emails, without having to send them
+Description: An Extension for WooCommerce that lets you Preview Emails, without having to send them.
 Plugin URI: http://www.digamberpradhan.com.np/woocommerce-preview-e-mails/
 Author: Digamber Pradhan
 Author URI: http://digamberpradhan.com.np/
