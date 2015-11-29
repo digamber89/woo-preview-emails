@@ -110,7 +110,8 @@ class WooCommercePreviewEmails{
 	}
 
 	public function generate_result(){
-		if( isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'] , 'woocommerce_preview_email' ) ):
+
+		if( is_admin() && isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'] , 'woocommerce_preview_email' ) ):
 			if( isset($_POST['orderID']) && !empty($_POST['orderID']) && isset($_POST['choose_email']) && !empty($_POST['choose_email']) ){
 			?>
 				<style type="text/css">
@@ -146,9 +147,9 @@ class WooCommercePreviewEmails{
 
 
 				echo '<div id="tool-options">';
-					echo '<h2> Currently Viewing Template File: '.$html_template.'</h2>';
+					echo '<p> <strong>Currently Viewing Template File: </strong>'.$current_email->template_html.'</p>';
+					echo '<p class="description"> <strong> Descripton: </strong>'.$current_email->description.'</p>';
 					$this->generate_form();
-					/*Design Required*/
 					echo '<a class="button" href="'.admin_url().'">Back to Admin Area</a>';
 				echo '</div>';
 				die;
