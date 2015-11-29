@@ -22,7 +22,7 @@ class WooCommercePreviewEmails{
 	
 	public function __construct(){
 		add_action('init', array($this, 'load'), 10 );
-		add_action('wp_loaded', array($this, 'generate_result'), 20 );
+		add_action('admin_init', array($this, 'generate_result'), 20 );
 		add_action('admin_menu', array($this, 'menu_page') );
 	}
 	public function load(){
@@ -55,23 +55,9 @@ class WooCommercePreviewEmails{
 	<?php
 	}
 
-	public function previewEmail($orderID = NULL, $template = NULL, $args = NULL){
-		if( !empty($orderID) || !empty($template) || !empty($args) ){
-		$order = new WC_Order($orderID);
-		?>
-		<style><?php wc_get_template( 'emails/email-styles.php' ); ?></style>
-		<?php
-		 	wc_get_template( 'emails/email-header.php', $args );
-	 	 	wc_get_template( $template, array( 
-	 	 		'order' => $order,
-	 	 		'email_heading'=> $args['email_heading'],
-	 	 		 )
-	 	 	);
-		 	wc_get_template( 'emails/email-footer.php' );
-		}
-	}
-
 	public function generate_form(){
+		 $choose_email = isset($_POST['choose_email'])?$_POST['choose_email']:'';
+		 $orderID = isset($_POST['orderID'])?$_POST['orderID']:'';
 		 ?>
 		<form id="woocommerce-preview-email" action="" method="post">
 		<table class="form-table">
@@ -85,7 +71,7 @@ class WooCommercePreviewEmails{
 			<select id="choose_email" name="choose_email">
 				<option value="">Choose Email</option>
 			<?php foreach($this->emails as $index => $email):	?>
-				<option value="<?php echo $index ?>"><?php echo $email->title; ?></option>
+				<option value="<?php echo $index ?>" <?php selected( $index, $choose_email ); ?>><?php echo $email->title; ?></option>
 			<?php endforeach; ?>
 			</select>
 			</td>
@@ -110,7 +96,7 @@ class WooCommercePreviewEmails{
 				$orders = get_posts($args);
 				foreach($orders as $order){
 			?>
- 				<option value="<?php echo $order->ID ?>"><?php echo $order->post_title; ?></option>
+ 				<option value="<?php echo $order->ID ?>" <?php selected( $order->ID, $orderID ); ?> ><?php echo $order->post_title; ?></option>
  			<?php }	?>
 			</select>
 			</td>
@@ -134,18 +120,37 @@ class WooCommercePreviewEmails{
 					}
 				</style>
 				<?php
-				echo '<div id="tool-options">';
-					$this->generate_form();
-					/*Design Required*/
-					#echo '<a href="'.admin_url().'">Back </a>';
-				echo '</div>';
 				$orderID = absint( $_POST['orderID'] );
 				$index = esc_attr( $_POST['choose_email'] );
 				$current_email = $this->emails[$index];
-				$html_template = $current_email->template_html;
-				$email_heading = $current_email->heading;
-				$args = array('email_heading' => $email_heading);
-				$this->previewEmail( $orderID, $html_template, $args );
+				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
+				if($index === 'WC_Email_Customer_Note'){
+					$customer_note = 'lorem ipsum';
+					$args = array(
+						'order_id'      => $orderID,
+						'customer_note' => $customer_note
+					);
+					$current_email->trigger($args);
+				}elseif($index === 'WC_Email_Customer_New_Account'){
+					$user_id = get_current_user_id();
+					$current_email->trigger($user_id);
+				}
+				else{
+					$current_email->trigger($orderID);
+				}
+
+
+				$content = $current_email->get_content_html();
+				$content = apply_filters( 'woocommerce_mail_content', $current_email->style_inline( $content ) );
+				echo $content;
+
+
+				echo '<div id="tool-options">';
+					echo '<h2> Currently Viewing Template File: '.$html_template.'</h2>';
+					$this->generate_form();
+					/*Design Required*/
+					echo '<a class="button" href="'.admin_url().'">Back to Admin Area</a>';
+				echo '</div>';
 				die;
 			}else{
 				$this->notice_message = 'Please specify both Order and Email';
