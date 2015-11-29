@@ -11,7 +11,7 @@ class WooCommercePreviewEmails{
 	 * Return an instance of this class.
 	 * @return object A single instance of this class.
 	 */
-	public $emails, $notice_message = null, $notice_class = null;
+	public $emails = null, $notice_message = null, $notice_class = null;
 	public static function get_instance() {
 		// If the single instance hasn't been set, set it now.
 		if ( is_null( self::$instance ) ) {
@@ -26,19 +26,13 @@ class WooCommercePreviewEmails{
 		add_action('admin_menu', array($this, 'menu_page') );
 	}
 	public function load(){
-		$wooDir = plugin_dir_path( WC_PLUGIN_FILE );
-		require_once( $wooDir.'includes/emails/class-wc-email.php' );
-		$emails['WC_Email_New_Order']                 		= include( $wooDir.'includes/emails/class-wc-email-new-order.php' );
-		$emails['WC_Email_Cancelled_Order']           		= include( $wooDir.'includes/emails/class-wc-email-cancelled-order.php' );
-		$emails['WC_Email_Customer_Processing_Order'] 		= include( $wooDir.'includes/emails/class-wc-email-customer-processing-order.php' );
-		$emails['WC_Email_Customer_Completed_Order']  		= include( $wooDir.'includes/emails/class-wc-email-customer-completed-order.php' );
-		$emails['WC_Email_Customer_Refunded_Order']   		= include( $wooDir.'includes/emails/class-wc-email-customer-refunded-order.php' );
-		$emails['WC_Email_Customer_Invoice']          		= include( $wooDir.'includes/emails/class-wc-email-customer-invoice.php' );
-		$emails['WC_Email_Customer_Note']             		= include( $wooDir.'includes/emails/class-wc-email-customer-note.php' );
-		$emails['WC_Email_Customer_Reset_Password']   		= include( $wooDir.'includes/emails/class-wc-email-customer-reset-password.php' );
-		$emails['WC_Email_Customer_New_Account']      		= include( $wooDir.'includes/emails/class-wc-email-customer-new-account.php' );
-		$emails = apply_filters( 'woocommerce_email_classes', $emails );
-		$this->emails = $emails;
+		if( class_exists('WC_Emails') ){
+			$wc_emails = WC_Emails::instance();
+			$emails = $wc_emails->get_emails();
+			if( !empty($emails) )
+				$this->emails = $emails;
+		}
+
 	}
 
 	function adminNotices(){
