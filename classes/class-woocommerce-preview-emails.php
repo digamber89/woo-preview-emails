@@ -125,6 +125,8 @@ class WooCommercePreviewEmails{
 				$index = esc_attr( $_POST['choose_email'] );
 				$current_email = $this->emails[$index];
 				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
+				add_filter( 'woocommerce_email_recipient_' . $current_email->id, array($this,'no_recipient') );
+				
 				if($index === 'WC_Email_Customer_Note'){
 					$customer_note = 'lorem ipsum';
 					$args = array(
@@ -159,6 +161,11 @@ class WooCommercePreviewEmails{
 				add_action( 'admin_notices', array($this,'adminNotices') ); 
 			}
 		endif;
+	}
+
+	public function no_recipient($recipient){
+		$recipient = NULL;
+		return $recipient;
 	}
 
 }
