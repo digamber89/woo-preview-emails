@@ -118,6 +118,7 @@ class WooCommercePreviewEmails{
 					#tool-options{
 						position: absolute;
 						top:0;
+						display: none;
 					}
 				</style>
 				<?php
