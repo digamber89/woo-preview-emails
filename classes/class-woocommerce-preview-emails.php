@@ -65,11 +65,11 @@ class WooCommercePreviewEmails{
 		<?php 
 			wp_nonce_field( 'woocommerce_preview_email', 'preview_email'); ?>
 			<th>
-			<label for="choose_email">Choose Email</label>
+			<label for="choose_email"><?php _e('Choose Email','woo-preview-emails'); ?></label>
 			</th>
 			<td>
 			<select id="choose_email" name="choose_email">
-				<option value="">Choose Email</option>
+				<option value=""><?php _e('Choose Email','woo-preview-emails'); ?></option>
 			<?php foreach($this->emails as $index => $email):	?>
 				<option value="<?php echo $index ?>" <?php selected( $index, $choose_email ); ?>><?php echo $email->title; ?></option>
 			<?php endforeach; ?>
@@ -86,12 +86,12 @@ class WooCommercePreviewEmails{
 		?>	
 			<th>
 			<label for="orderID">
-				Choose Order
+				<?php _e('Choose Order','woo-preview-emails'); ?>
 			</label>
 			</th>
 			<td>
 			<select name="orderID">
-				<option value="">Choose Order</option>
+				<option value=""><?php _e('Choose Order','woo-preview-emails'); ?></option>
 			<?php
 				$orders = get_posts($args);
 				foreach($orders as $order){
@@ -118,7 +118,6 @@ class WooCommercePreviewEmails{
 					#tool-options{
 						position: absolute;
 						top:0;
-						display: none;
 					}
 				</style>
 				<?php
@@ -153,7 +152,7 @@ class WooCommercePreviewEmails{
 					echo '<p> <strong>Currently Viewing Template File: </strong>'.$current_email->template_html.'</p>';
 					echo '<p class="description"> <strong> Descripton: </strong>'.$current_email->description.'</p>';
 					$this->generate_form();
-					echo '<a class="button" href="'.admin_url().'">Back to Admin Area</a>';
+					echo '<a class="button" href="'.admin_url().'">'.__('Back to Admin Area','woo-preview-emails').'</a>';
 				echo '</div>';
 				die;
 			}else{
