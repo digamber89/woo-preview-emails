@@ -2,8 +2,8 @@
 Contributors: digamberpradhan
 Tags: WooCommerce, Emails, Preview, WooCommerce Preview Emails
 Requires at least: 3.8
-Tested up to: 4.7
-Stable tag: 1.2.7
+Tested up to: 4.8
+Stable tag: 1.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ An Extension for WooCommerce that allows you to Preview Email Templates.
 
 == Description ==
 An Extension for WooCommerce that allows you to Preview Email Templates. 
-Compatible with WooCommerce 3.0.3
+Compatible with WooCommerce 3.1.0
 
 1. Just install the plugin and an admin section will be generated that lists the different Emails that WooCommerce sends.
 2. Choose the templates and an Order
@@ -38,6 +38,12 @@ You can now send test mails, to test on actual devices
 4. Example
 5. Send emails to yourself to check on other devices
 == Changelog ==
+= 1.2.8 = 
+- Formatted Code to make it easier for other developers to review
+- Removed filter after adding when sending tested emails to avoid unwanted emails being sent to customers
+- Tested against recent version of WordPress and WooCommerce
+
+
 = 1.2.7 =
 - Fix: issue with wrong constant being used for file path https://wordpress.org/support/topic/php-notice-in-php-7-0-x/ 
 
@@ -48,20 +54,28 @@ You can now send test mails, to test on actual devices
 
 = 1.2.5 =
 28-12-2016: Menu location changed(under WooCommerce menu), User e-mails no longer need orders to be selected, added screenshots
+
 = 1.2.4 =
 Made update so that order number instead of order date
+
 = 1.2.3 = 
 Fix Broken back to admin url
+
 = 1.2.1 =
 Update Missing Changelog
+
 = 1.2.0 =
 Changed UI to make responsive testing easier
+
 = 1.1.2 =
 Changed number of orders visible to 10, to prevent unnecessary load on larger shops
+
 = 1.1.1 =
 You can now send test emails to yourself
+
 = 1.1 =
 Plugin is now translation ready, please find the .pot file in /languages 
+
 = 1.0 =
 * First Version
 
