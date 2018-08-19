@@ -9,6 +9,8 @@ Version: 1.2.8
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 Text Domain: woo-preview-emails
 Domain Path: /languages
+WC requires at least: 3.0.0
+WC tested up to: 3.4.4 
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
