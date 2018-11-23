@@ -14,7 +14,7 @@ An Extension for WooCommerce that allows you to Preview Email Templates.
 
 1. Just install the plugin and an admin section will be generated that lists the different Emails that WooCommerce sends.
 2. Choose the templates and an Order
-3. A preview of the selected E-mail will be shown 
+3. A preview of the selected E-mail will be shown
 
 == Installation ==
 
@@ -37,8 +37,12 @@ You can now send test mails, to test on actual devices
 4. Example
 5. Send emails to yourself to check on other devices
 == Changelog ==
+= 1.5.0 =
+ - Add support for WooCommerce Subscriptions thanks to https://github.com/digamber89/woocommerce-preview-emails/pull/7
+ - Fix compatibility issue with WooCommerce Order Status Manager
+ 
 = 1.4.1 =
-Show compatibility with WooCommerce version 3.4.4 
+Show compatibility with WooCommerce version 3.4.4
 
 = 1.4.0 =
 Fixed fatal error issue when selecting orders via dropdown
@@ -50,21 +54,21 @@ Added support for On Hold payment status using BACS, thanks again to @prasidhda 
 Fixed issue where emails send function was causing fatal error, thanks to @prasidhda https://profiles.wordpress.org/prasidhda
 
 = 1.2.11 =
-Added WC version compatibility check https://woocommerce.wordpress.com/2017/08/28/new-version-check-in-woocommerce-3-2/ 
+Added WC version compatibility check https://woocommerce.wordpress.com/2017/08/28/new-version-check-in-woocommerce-3-2/
 
 = 1.2.10 =
 - Enhancement : Added filter to allow shop managers or any other capability to preview e-mails
 
-= 1.2.9 = 
+= 1.2.9 =
 - Fix: Fixed possible conflict with other plugins that create custom emails for woocommerce (known conflict with https://woocommerce.com/products/woocommerce-order-status-manager/)
 
-= 1.2.8 = 
+= 1.2.8 =
 - Formatted Code to make it easier for other developers to review
 - Removed filter after adding when sending tested emails to avoid unwanted emails being sent to customers
 - Tested against recent version of WordPress and WooCommerce
 
 = 1.2.7 =
-- Fix: issue with wrong constant being used for file path https://wordpress.org/support/topic/php-notice-in-php-7-0-x/ 
+- Fix: issue with wrong constant being used for file path https://wordpress.org/support/topic/php-notice-in-php-7-0-x/
 
 = 1.2.6 =
 - Added ability to search for particular orders
@@ -77,7 +81,7 @@ Added WC version compatibility check https://woocommerce.wordpress.com/2017/08/2
 = 1.2.4 =
 Made update so that order number instead of order date
 
-= 1.2.3 = 
+= 1.2.3 =
 Fix Broken back to admin url
 
 = 1.2.1 =
@@ -93,14 +97,7 @@ Changed number of orders visible to 10, to prevent unnecessary load on larger sh
 You can now send test emails to yourself
 
 = 1.1 =
-Plugin is now translation ready, please find the .pot file in /languages 
+Plugin is now translation ready, please find the .pot file in /languages
 
 = 1.0 =
 * First Version
-
-
-
-
-
-
-
