@@ -174,7 +174,17 @@ class WooCommercePreviewEmails{
 					
 					$user_id = get_current_user_id();
 					$current_email->trigger($user_id);
+				} else if ( strpos($index, 'WCS_Email' ) === 0 && class_exists('WC_Subscription') && is_subclass_of($current_email,'WC_Email') ) {
+					/* Get the subscriptions for the selected order */
+					$order_subscriptions = wcs_get_subscriptions_for_order($orderID);
+					if (!empty($order_subscriptions)) {
+						/* Pick the first one as an example */
+						$subscription = array_pop($order_subscriptions);
+						$current_email->trigger($subscription);
 
+					} else {
+						$current_email->trigger($orderID);
+					}
 				} else {
 					
 					$current_email->trigger($orderID);
