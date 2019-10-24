@@ -1,9 +1,9 @@
-=== Woo Preview Emails ===
+=== Preview E-mails for WooCommerce ===
 Contributors: digamberpradhan
-Tags: WooCommerce, Emails, Preview, WooCommerce Preview Emails
+Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
-Tested up to: 4.9.8
-Stable tag: 1.5.0
+Tested up to: 5.2
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ An Extension for WooCommerce that allows you to Preview Email Templates.
 
 == Installation ==
 
-1. Upload `woocommerce-preview-emails` to the `/wp-content/plugins/` directory
+1. Upload `preview-emails-woocommerce` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. You're done go to Preview Emails section in the admin menu and start previewing
 
@@ -37,10 +37,13 @@ You can now send test mails, to test on actual devices
 4. Example
 5. Send emails to yourself to check on other devices
 == Changelog ==
+
+= 1.5.1 =
+Minor Tweak: Removed Trademark Infringement and verified against WooCommerce 3.6.2 and WordPress 5.2
+
 = 1.5.0 =
  - Add support for WooCommerce Subscriptions thanks to https://github.com/digamber89/woocommerce-preview-emails/pull/7
- - Fix compatibility issue with WooCommerce Order Status Manager
- 
+ - Fix compatibility issue with WooCommerce Order Status Manager 
 = 1.4.1 =
 Show compatibility with WooCommerce version 3.4.4
 
