@@ -5,12 +5,14 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 	class WooCommercePreviewEmails {
 		/**
 		 * Instance of this class.
+		 *
 		 * @var object
 		 */
 		protected static $instance = null;
 		private $recipient = '';
 		/**
 		 * Return an instance of this class.
+		 *
 		 * @return object A single instance of this class.
 		 */
 		public $emails = null, $notice_message = null, $notice_class = null;
@@ -96,7 +98,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 						'WC_Email_Admin_Booking_Cancelled',
 					);
 
-					//Filtering out booking emails becuase it won't work from this plugin
+					//Filtering out subscription emails becuase it won't work from this plugin
 					//Buy PRO version if you need this capability
 					$unset_subscription_emails = array(
 						'WCS_Email_New_Renewal_Order',
