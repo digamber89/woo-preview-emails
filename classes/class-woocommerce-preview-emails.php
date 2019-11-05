@@ -151,7 +151,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 			?>
             <div class="wrap">
 				<?php
-				if ( ! in_array( 'woo-preview-emails/woocommerce-preview-emails.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+				if ( !in_array( 'woo-preview-emails-pro-addon/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 					?>
                     <div id="message" class="notice notice-warning">
                         <h3>Need more features ?</h3>
