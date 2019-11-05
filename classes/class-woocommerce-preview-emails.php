@@ -96,6 +96,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 						'WC_Email_Booking_Notification',
 						'WC_Email_Booking_Cancelled',
 						'WC_Email_Admin_Booking_Cancelled',
+						'WC_Email_Booking_Pending_Confirmation'
 					);
 
 					//Filtering out subscription emails becuase it won't work from this plugin
@@ -152,7 +153,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
                 <div id="message" class="notice notice-warning">
                     <h3>Need more features ?</h3>
                     <p>
-                        <a href="https://www.codemanas.com/downloads/">Check out the pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription templates.</p>
+                        <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription templates.</p>
                 </div>
                 <h2>Woo Preview Emails</h2>
                 <hr/>
@@ -215,7 +216,8 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 					/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 					add_filter( 'woocommerce_email_recipient_' . $current_email->id, array( $this, 'no_recipient' ) );
 
-					$additional_data = apply_filters( 'woo_preview_additional_orderID', $index, $orderID, $current_email );
+					$additional_data = apply_filters( 'woo_preview_additional_orderID', false, $index, $orderID, $current_email );
+
 					if ( $additional_data ) {
 						do_action( 'woo_preview_additional_order_trigger', $current_email, $additional_data );
 					} else {
