@@ -36,7 +36,14 @@ You can now send test mails, to test on actual devices
 3. Preview User E-mails
 4. Example
 5. Send emails to yourself to check on other devices
+
 == Changelog ==
+
+=1.5.3=
+- Minor Condition checkings added
+- Removed Email options which is not supported resulting in error generation.
+- Version Bump
+
 =1.5.2=
 Compatible with WooCommerce 3.7.1
 
