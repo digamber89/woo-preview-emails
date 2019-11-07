@@ -113,8 +113,18 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 						'WCS_Email_On_Hold_Subscription'
 					);
 
+					//Filtering out membership emails becuase it won't work from this plugin
+					//Buy PRO version if you need this capability
+					$unset_membership_emails = array(
+						'WC_Memberships_User_Membership_Note_Email',
+						'WC_Memberships_User_Membership_Ending_Soon_Email',
+						'WC_Memberships_User_Membership_Ended_Email',
+						'WC_Memberships_User_Membership_Renewal_Reminder_Email',
+					);
+
 					$unset_booking_emails      = apply_filters( 'woo_preview_emails_unset_booking_emails', $unset_booking_emails );
 					$unset_subscription_emails = apply_filters( 'woo_preview_emails_unset_subscription_emails', $unset_subscription_emails );
+					$unset_membership_emails   = apply_filters( 'woo_preview_emails_unset_memebership_emails', $unset_membership_emails );
 
 					if ( ! empty( $unset_booking_emails ) ) {
 						foreach ( $unset_booking_emails as $unset_booking_email ) {
@@ -128,6 +138,14 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 						foreach ( $unset_subscription_emails as $unset_subscription_email ) {
 							if ( isset( $emails[ $unset_subscription_email ] ) ) {
 								unset( $emails[ $unset_subscription_email ] );
+							}
+						}
+					}
+
+					if ( ! empty( $unset_membership_emails ) ) {
+						foreach ( $unset_membership_emails as $unset_membership_email ) {
+							if ( isset( $emails[ $unset_membership_email ] ) ) {
+								unset( $emails[ $unset_membership_email ] );
 							}
 						}
 					}
@@ -150,22 +168,20 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		public function generate_page() {
 			?>
             <div class="wrap">
+                <h2>Woo Preview Emails</h2>
 				<?php
-				if ( !in_array( 'woo-preview-emails-pro-addon/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+				if ( ! in_array( 'woo-preview-emails-pro-addon/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 					?>
                     <div id="message" class="notice notice-warning">
                         <h3>Need more features ?</h3>
                         <p>
                             <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription templates.</p>
                     </div>
+                    <div id="message" class="notice notice-warning">
+                        <p>If you have found this plugin useful, please leave a <a href="https://wordpress.org/support/plugin/woo-preview-emails/reviews/#new-post" target="_blank">review</a>
+                        <p><strong><?php _e( "Note: E-mails require orders to exist before you can preview them", 'woo-preview-emails' ); ?></strong></p>
+                    </div>
 				<?php } ?>
-
-                <h2>Woo Preview Emails</h2>
-                <div id="message" class="notice notice-warning">
-                    <p>If you have found this plugin useful, please leave a <a href="https://wordpress.org/support/plugin/woo-preview-emails/reviews/#new-post" target="_blank">review</a>
-                    <p><strong><?php _e( "Note: E-mails require orders to exist before you can preview them", 'woo-preview-emails' ); ?></strong></p>
-                </div>
-
 
 				<?php $this->generate_form(); ?>
             </div>
@@ -177,11 +193,19 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 			$orderID         = isset( $_POST['orderID'] ) ? $_POST['orderID'] : '';
 			$recipient_email = isset( $_POST['email'] ) ? $_POST['email'] : '';
 
-			do_action( 'woo_preview_emails_before_form' );
+			if ( is_admin() && isset( $_POST['preview_email'] ) ) {
+				require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
+			} else {
+				do_action( 'woo_preview_emails_before_form' );
 
-			require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
+				//Custom tab implmentation
+				$tabs = apply_filters( 'woo_preview_emails_tabs', false );
+				if ( ! $tabs ) {
+					require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
+				}
 
-			do_action( 'woo_preview_emails_after_form' );
+				do_action( 'woo_preview_emails_after_form' );
+			}
 		}
 
 		public function generate_result() {
@@ -224,7 +248,6 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 					add_filter( 'woocommerce_email_recipient_' . $current_email->id, array( $this, 'no_recipient' ) );
 
 					$additional_data = apply_filters( 'woo_preview_additional_orderID', false, $index, $orderID, $current_email );
-
 					if ( $additional_data ) {
 						do_action( 'woo_preview_additional_order_trigger', $current_email, $additional_data );
 					} else {
@@ -274,7 +297,8 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
                             </p>
                             <p class="description">
                                 <strong> Descripton: </strong>
-								<?php echo $current_email->description; ?></p>
+								<?php echo $current_email->description; ?>
+                            </p>
 							<?php $this->generate_form(); ?>
                             <!-- admin url was broken -->
                             <a class="button" href="<?php echo admin_url( 'admin.php?page=digthis-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
