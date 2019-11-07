@@ -22,8 +22,10 @@
 		left:0px;
 	}
 
-
-	#tool-wrap{ position: relative; }
+	#tool-wrap{ position: relative; padding:10px 20px;}
+    #tool-wrap table select, input[type='email'] {
+        width: 100%;
+    }
 	#show_menu{
 		text-decoration: none;
 		    padding: 10px;
