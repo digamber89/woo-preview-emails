@@ -41,7 +41,7 @@
             </td>
         </tr>
         <tr>
-            <th>Search Orders</th>
+            <th><?php _e('Search Orders','woo-preview-emails'); ?></th>
             <td>
                 <select name="search_order" id="woo_preview_search_orders" class="woo_preview_search_orders" class="regular-text" style="width: 35%;">
 					<?php
@@ -51,10 +51,12 @@
 						<?php
 					}
 					?>
-                    <option value="">Search Orders</option>
+                    <option value=""><?php _e('Search Orders','woo-preview-emails'); ?></option>
                 </select>
-                <p id="search-description" class="description">Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only.
-                    Example: 90 </p>
+                <p id="search-description" class="description">
+                    <?php _e('Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only.
+                    Example: 90','woo-preview-emails'); ?>
+                    </p>
                 <script type="text/javascript">
                     jQuery(function ($) {
                         if (typeof ajaxurl == 'undefined') {

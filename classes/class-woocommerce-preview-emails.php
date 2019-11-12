@@ -162,7 +162,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 
 		public function menu_page() {
 			//moved into submenu
-			add_submenu_page( 'woocommerce', 'WooCommerce Preview Emails', 'Preview Emails', apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ), 'digthis-woocommerce-preview-emails', array( $this, 'generate_page' ) );
+			add_submenu_page( 'woocommerce', 'WooCommerce Preview Emails', __('Preview Emails','woo-preview-emails'), apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ), 'digthis-woocommerce-preview-emails', array( $this, 'generate_page' ) );
 		}
 
 		public function generate_page() {

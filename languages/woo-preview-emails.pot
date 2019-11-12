@@ -1,29 +1,74 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Woo Preview Emails\n"
-"POT-Creation-Date: 2016-05-11 14:29+0545\n"
-"PO-Revision-Date: 2016-05-11 14:29+0545\n"
+"POT-Creation-Date: 2019-11-12 12:23+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: classes/class-woocommerce-preview-emails.php:68
-#: classes/class-woocommerce-preview-emails.php:72
+#: classes/class-woocommerce-preview-emails.php:165
+msgid "Preview Emails"
+msgstr ""
+
+#: classes/class-woocommerce-preview-emails.php:182
+msgid "Note: E-mails require orders to exist before you can preview them"
+msgstr ""
+
+#: classes/class-woocommerce-preview-emails.php:304
+msgid "Back to Admin Area"
+msgstr ""
+
+#: views/form.php:7 views/form.php:11
 msgid "Choose Email"
 msgstr ""
 
-#: classes/class-woocommerce-preview-emails.php:89
+#: views/form.php:28 views/form.php:33
 msgid "Choose Order"
 msgstr ""
 
-#: classes/class-woocommerce-preview-emails.php:155
-msgid "Back to Admin Area"
+#: views/form.php:44 views/form.php:54
+msgid "Search Orders"
+msgstr ""
+
+#: views/form.php:57
+msgid ""
+"Only use this field if you have particular orders, that are not listed above "
+"in the Choose Order Field. Type the Order ID only.\n"
+"                    Example: 90"
+msgstr ""
+
+#: views/form.php:94
+msgid "Mail to"
+msgstr ""
+
+#. Name of the plugin
+msgid "Preview E-mails for WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"An Extension for WooCommerce that lets you Preview Emails, without having to "
+"send them."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://www.digamberpradhan.com/preview-e-mails-for-woocommerce/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Digamber Pradhan"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://digamberpradhan.com/"
 msgstr ""
