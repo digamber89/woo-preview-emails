@@ -99,5 +99,5 @@
             </td>
         </tr>
     </table>
-    <p><input type="submit" name="submit" class="button button-primary"></p>
+    <p><input type="submit" name="submit" value="<?php _e('Submit','woo-preview-emails') ?>" class="button button-primary"></p>
 </form>
