@@ -3,7 +3,7 @@ Contributors: digamberpradhan
 Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
 Tested up to: 5.2
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ An Extension for WooCommerce that allows you to Preview Email Templates.
 You can now send test mails, to test on actual devices
 
 *note: If the mail isn't seen in you inbox, please first check your spam folder
+
+== Pro Version ==
+Looking for integratioin with WooCommerce Bookings and Subscriptions - check out the Pro Add On [Preview E-mails for WooCommerce](https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro/)
 
 == Screenshots ==
 
