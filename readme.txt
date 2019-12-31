@@ -2,7 +2,8 @@
 Contributors: digamberpradhan
 Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
-Tested up to: 5.2
+Tested up to: 5.3
+Requires PHP: 5.6
 Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -41,6 +42,9 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+=1.6.1=
+WordPress compatibility update
+
 =1.6.0=
 Code refactoring and UI and UX changes
 
@@ -60,7 +64,7 @@ Minor Tweak: Removed Trademark Infringement and verified against WooCommerce 3.6
 
 = 1.5.0 =
  - Add support for WooCommerce Subscriptions thanks to https://github.com/digamber89/woocommerce-preview-emails/pull/7
- - Fix compatibility issue with WooCommerce Order Status Manager 
+ - Fix compatibility issue with WooCommerce Order Status Manager
 = 1.4.1 =
 Show compatibility with WooCommerce version 3.4.4
 
