@@ -29,7 +29,7 @@
                 </label>
             </th>
             <td>
-                <select name="orderID" class="regular-text">
+                <select name="orderID" id="orderID" class="regular-text">
                     <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
 					<?php
 					$orders = get_posts( $args );
@@ -41,7 +41,7 @@
             </td>
         </tr>
         <tr>
-            <th><?php _e('Search Orders','woo-preview-emails'); ?></th>
+            <th><label for="woo_preview_search_orders"><?php _e( 'Search Orders', 'woo-preview-emails' ); ?></label></th>
             <td>
                 <select name="search_order" id="woo_preview_search_orders" class="woo_preview_search_orders" class="regular-text" style="width: 35%;">
 					<?php
@@ -51,12 +51,11 @@
 						<?php
 					}
 					?>
-                    <option value=""><?php _e('Search Orders','woo-preview-emails'); ?></option>
+                    <option value=""><?php _e( 'Search Orders', 'woo-preview-emails' ); ?></option>
                 </select>
                 <p id="search-description" class="description">
-                    <?php _e('Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only.
-                    Example: 90','woo-preview-emails'); ?>
-                    </p>
+					<?php _e( 'Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90',    'woo-preview-emails' ); ?>
+                </p>
                 <script type="text/javascript">
                     jQuery(function ($) {
                         if (typeof ajaxurl == 'undefined') {
@@ -77,7 +76,7 @@
                                 },
                                 processResults: function (data, params) {
                                     return {
-                                        results: data,
+                                        results: data
                                     };
                                 },
                                 cache: true
@@ -99,5 +98,5 @@
             </td>
         </tr>
     </table>
-    <p><input type="submit" name="submit" value="<?php _e('Submit','woo-preview-emails') ?>" class="button button-primary"></p>
+    <p><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>
