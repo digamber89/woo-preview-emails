@@ -157,12 +157,12 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		}
 
 		public function adminNotices() {
-			echo "<div class=\"$this->notice_class\"> <p>$this->notice_message</p></div>";
+			echo "<div class=\"$this->notice_class\"><p>$this->notice_message</p></div>";
 		}
 
 		public function menu_page() {
 			//moved into submenu
-			add_submenu_page( 'woocommerce', 'WooCommerce Preview Emails', __('Preview Emails','woo-preview-emails'), apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ), 'digthis-woocommerce-preview-emails', array( $this, 'generate_page' ) );
+			add_submenu_page( 'woocommerce', 'WooCommerce Preview Emails', __( 'Preview Emails', 'woo-preview-emails' ), apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ), 'digthis-woocommerce-preview-emails', array( $this, 'generate_page' ) );
 		}
 
 		public function generate_page() {
@@ -234,9 +234,9 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 					/*Make Sure serached order is selected */
 					$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
 					$index           = esc_attr( $_POST['choose_email'] );
-					$recipeint_email = $_POST['email'];
+					$recipient_email = $_POST['email'];
 
-					if ( is_email( $recipeint_email ) ) {
+					if ( is_email( $recipient_email ) ) {
 						$this->recipient = $_POST['email'];
 					} else {
 						$this->recipient = '';
