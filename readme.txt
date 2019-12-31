@@ -3,7 +3,7 @@ Contributors: digamberpradhan
 Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
 Tested up to: 5.2
-Stable tag: 1.5.5
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+=1.6.0=
+Code refactoring and UI and UX changes
+
 =1.5.4=
 Correction for untranslated Submit Button
 
