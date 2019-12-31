@@ -66,19 +66,22 @@
     }
 
     #tool-options {
-        width: 590px;
+        width: 50%;
         background: #fff;
-        border-style: solid;
-        border-width: 2px 2px 2px 0px;
+        border: none;
+        box-shadow: 0 0 12px 1px #2c2c2c;
         position: fixed;
-        top: 30%;
-        left: -590px;
-        transition: all 0.8s ease-in-out;
+        top: -100%;
+        left: 50%;
+        transition: all 0.3s ease-in-out;
+        transform:translateX(-50%);
+        opacity:0;
 
     }
 
     #tool-options.active {
-        left: 0;
+        top: 10%;
+        opacity: 1;
     }
 
     #tool-wrap {
@@ -94,11 +97,10 @@
         text-decoration: none;
         padding: 10px;
         color: #000;
-        position: absolute;
-        right: -72px;
-        top: 42%;
+        position: fixed;
+        top: 10%;
+        left: 5%;
         background: #fff;
-        transform: rotate(-90deg);
         border: 2px solid;
     }
 </style>

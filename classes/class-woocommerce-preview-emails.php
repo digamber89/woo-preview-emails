@@ -297,8 +297,10 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 							<?php $this->generate_form(); ?>
                             <!-- admin url was broken -->
                             <a class="button" href="<?php echo admin_url( 'admin.php?page=digthis-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
-                            <a href="#" id="show_menu" class="show_menu">Show Menu</a>
                         </div>
+                    </div>
+                    <div class="menu-toggle-wrapper">
+                        <a href="#" id="show_menu" class="show_menu">Show Menu</a>
                     </div>
 					<?php
 					die;
