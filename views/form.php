@@ -10,7 +10,7 @@
                 <select id="choose_email" name="choose_email" class="regular-text">
                     <option value=""><?php _e( 'Choose Email', 'woo-preview-emails' ); ?></option>
 					<?php foreach ( $this->emails as $index => $email ): ?>
-                        <option value="<?php echo $index ?>" <?php selected( $index, $choose_email ); ?>><?php echo $email->title; ?></option>
+                        <option value="<?php echo $index ?>" <?php selected( $index, $this->choose_email ); ?>><?php echo $email->title; ?></option>
 					<?php endforeach; ?>
                 </select>
             </td>
@@ -35,7 +35,7 @@
 					$orders = get_posts( $args );
 					foreach ( $orders as $order ) {
 						?>
-                        <option value="<?php echo $order->ID ?>" <?php selected( $order->ID, $orderID ); ?> >#order : <?php echo $order->ID; ?></option>
+                        <option value="<?php echo $order->ID ?>" <?php selected( $order->ID, $this->orderID ); ?> >#order : <?php echo $order->ID; ?></option>
 					<?php } ?>
                 </select>
             </td>
@@ -54,11 +54,11 @@
                     <option value=""><?php _e( 'Search Orders', 'woo-preview-emails' ); ?></option>
                 </select>
                 <p id="search-description" class="description">
-					<?php _e( 'Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90',    'woo-preview-emails' ); ?>
+					<?php _e( 'Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90', 'woo-preview-emails' ); ?>
                 </p>
                 <script type="text/javascript">
                     jQuery(function ($) {
-                        if (typeof ajaxurl == 'undefined') {
+                        if (typeof ajaxurl === 'undefined') {
                             ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
                         }
                         $("#woo_preview_search_orders").select2({
@@ -74,7 +74,7 @@
                                         action: 'woo_preview_orders_search'
                                     };
                                 },
-                                processResults: function (data, params) {
+                                processResults: function (data) {
                                     return {
                                         results: data
                                     };
@@ -94,7 +94,7 @@
                 </label>
             </th>
             <td>
-                <input type="email" name="email" id="email" class="regular-text" value="<?php echo $recipient_email; ?>"/>
+                <input type="email" name="email" id="email" class="regular-text" value="<?php echo $this->recipient; ?>"/>
             </td>
         </tr>
     </table>

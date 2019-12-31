@@ -9,7 +9,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		 * @var object
 		 */
 		protected static $instance = null;
-		private $recipient = '';
+		private $plugin_url, $choose_email, $orderID, $recipient;
 		/**
 		 * Return an instance of this class.
 		 *
@@ -27,6 +27,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		}
 
 		public function __construct() {
+			$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
 			add_action( 'init', array( $this, 'load' ), 999 );
 			add_action( 'admin_init', array( $this, 'generate_result' ), 20 );
 			add_action( 'admin_menu', array( $this, 'menu_page' ), 90 );
@@ -69,9 +70,8 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 			if ( $hook != 'woocommerce_page_digthis-woocommerce-preview-emails' ) {
 				return;
 			}
-			$my_plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
-			wp_register_style( 'woo-preview-email-select2-css', $my_plugin_url . '/assets/css/select2.min.css' );
-			wp_register_script( 'woo-preview-email-select2-js', $my_plugin_url . '/assets/js/select2.min.js', array( 'jquery' ), '', true );
+			wp_register_style( 'woo-preview-email-select2-css', $this->plugin_url . '/assets/css/select2.min.css' );
+			wp_register_script( 'woo-preview-email-select2-js', $this->plugin_url . '/assets/js/select2.min.js', array( 'jquery' ), '', true );
 
 			wp_enqueue_style( 'woo-preview-email-select2-css' );
 			wp_enqueue_script( 'woo-preview-email-select2-js' );
@@ -189,9 +189,9 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		}
 
 		public function generate_form() {
-			$choose_email    = isset( $_POST['choose_email'] ) ? $_POST['choose_email'] : '';
-			$orderID         = isset( $_POST['orderID'] ) ? $_POST['orderID'] : '';
-			$recipient_email = isset( $_POST['email'] ) ? $_POST['email'] : '';
+			$this->choose_email = isset( $_POST['choose_email'] ) ? $_POST['choose_email'] : '';
+			$this->orderID      = isset( $_POST['orderID'] ) ? $_POST['orderID'] : '';
+			$recipient_email    = isset( $_POST['email'] ) ? $_POST['email'] : '';
 
 			if ( is_admin() && isset( $_POST['preview_email'] ) ) {
 				require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
@@ -213,19 +213,14 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 			if ( is_admin() && isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'], 'woocommerce_preview_email' ) ):
 				$condition = false;
 				$wc_payment_gateways = WC_Payment_Gateways::instance();
-				if ( isset( $_POST['choose_email'] )
-
-				     && ( $_POST['choose_email'] == 'WC_Email_Customer_New_Account' || $_POST['choose_email'] == 'WC_Email_Customer_Reset_Password' )
-
-				) {
+				if ( isset( $_POST['choose_email'] ) && ( $_POST['choose_email'] == 'WC_Email_Customer_New_Account' || $_POST['choose_email'] == 'WC_Email_Customer_Reset_Password' ) ) {
 					$condition = true;
-
 				} elseif ( ( ( isset( $_POST['orderID'] ) && ! empty( $_POST['orderID'] ) ) || ( isset( $_POST['search_order'] ) && ! empty( $_POST['search_order'] ) ) ) && ( isset( $_POST['choose_email'] ) && ! empty( $_POST['choose_email'] ) ) ) {
 					$condition = true;
 				}
 
 				if ( $condition == true ) {
-					$my_plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
+					$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
 
 					/*Load the styles and scripts*/
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';

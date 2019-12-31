@@ -1,7 +1,7 @@
 <?php
 /*Not the WordPress way but i'm trying to avoid any accidental CSS that would effect how the email template looks*/
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo $my_plugin_url.'/assets/css/select2.min.css'; ?>" >
+<link rel="stylesheet" type="text/css" href="<?php echo $this->plugin_url.'/assets/css/select2.min.css'; ?>" >
 <style type="text/css">
 	#search-description{
 		display: none;
@@ -19,7 +19,7 @@
 	}
 
 	#tool-options.active{
-		left:0px;
+		left:0;
 	}
 
 	#tool-wrap{ position: relative; padding:10px 20px;}
