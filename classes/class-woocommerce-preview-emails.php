@@ -287,8 +287,8 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
                     <div id="tool-options">
                         <div id="tool-wrap">
                             <p>
-                                <strong>Currently Viewing Template File: </strong>
-								<?php echo $current_email->template_html; ?>
+                                <strong>Currently Viewing Template File: </strong><br />
+								<?php echo wc_locate_template( $current_email->template_html ); ?>
                             </p>
                             <p class="description">
                                 <strong> Descripton: </strong>
