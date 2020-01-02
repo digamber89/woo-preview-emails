@@ -42,9 +42,6 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
-=1.6.1=
-WordPress compatibility update
-
 =1.6.0=
 Code refactoring and UI and UX changes
 

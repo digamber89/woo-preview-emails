@@ -33,6 +33,6 @@ if( is_woocommerce_active() ){
 }
 
 function woo_preview_emails_load_text_domain() {
-	load_plugin_textdomain( 'woo-preview-emails', FALSE, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
+    load_plugin_textdomain( 'woo-preview-emails', FALSE, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'woo_preview_emails_load_text_domain' );
