@@ -4,7 +4,7 @@ Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+=1.6.1=
+Show full path for template file instead.
+
 =1.6.0=
 Code refactoring and UI and UX changes
 
