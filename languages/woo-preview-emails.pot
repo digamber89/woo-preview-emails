@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Preview E-mails for WooCommerce
+# Copyright (C) 2020 Preview E-mails for WooCommerce
 # This file is distributed under the same license as the Preview E-mails for WooCommerce package.
 msgid ""
 msgstr ""
@@ -13,15 +13,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: classes/class-woocommerce-preview-emails.php:165
+#: classes/class-woocommerce-preview-emails.php:164
 msgid "Preview Emails"
 msgstr ""
 
-#: classes/class-woocommerce-preview-emails.php:182
+#: classes/class-woocommerce-preview-emails.php:181
 msgid "Note: E-mails require orders to exist before you can preview them"
 msgstr ""
 
-#: classes/class-woocommerce-preview-emails.php:304
+#: classes/class-woocommerce-preview-emails.php:295
 msgid "Back to Admin Area"
 msgstr ""
 
