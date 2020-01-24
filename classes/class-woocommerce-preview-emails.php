@@ -86,7 +86,6 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 				$wc_emails = WC_Emails::instance();
 				$emails    = $wc_emails->get_emails();
 				if ( ! empty( $emails ) ) {
-
 					//Filtering out booking emails becuase it won't work from this plugin
 					//Buy PRO version if you need this capability
 					$unset_booking_emails = array(
@@ -212,7 +211,6 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 
 			if ( is_admin() && isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'], 'woocommerce_preview_email' ) ):
 				$condition = false;
-				$wc_payment_gateways = WC_Payment_Gateways::instance();
 				if ( isset( $_POST['choose_email'] ) && ( $_POST['choose_email'] == 'WC_Email_Customer_New_Account' || $_POST['choose_email'] == 'WC_Email_Customer_Reset_Password' ) ) {
 					$condition = true;
 				} elseif ( ( ( isset( $_POST['orderID'] ) && ! empty( $_POST['orderID'] ) ) || ( isset( $_POST['search_order'] ) && ! empty( $_POST['search_order'] ) ) ) && ( isset( $_POST['choose_email'] ) && ! empty( $_POST['choose_email'] ) ) ) {
@@ -238,7 +236,6 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 					}
 
 					$current_email = $this->emails[ $index ];
-
 					/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 					add_filter( 'woocommerce_email_recipient_' . $current_email->id, array( $this, 'no_recipient' ) );
 
@@ -256,19 +253,18 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 							$current_email->trigger( $args );
 
 						} else if ( $index === 'WC_Email_Customer_New_Account' ) {
-
 							$user_id = get_current_user_id();
 							$current_email->trigger( $user_id );
 						} else if ( strpos( $index, 'WCS_Email' ) === 0 && class_exists( 'WC_Subscription' ) && is_subclass_of( $current_email, 'WC_Email' ) ) {
 							/* Get the subscriptions for the selected order */
 							$order_subscriptions = wcs_get_subscriptions_for_order( $orderID );
-							if ( ! empty( $order_subscriptions ) ) {
+							if ( ! empty( $order_subscriptions ) && $current_email->id != 'customer_payment_retry' && $current_email->id != 'payment_retry' ) {
 								/* Pick the first one as an example */
 								$subscription = array_pop( $order_subscriptions );
 								$current_email->trigger( $subscription );
 
 							} else {
-								$current_email->trigger( $orderID );
+								$current_email->trigger( $orderID, wc_get_order( $orderID ) );
 							}
 						} else {
 							$current_email->trigger( $orderID );
@@ -287,7 +283,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
                     <div id="tool-options">
                         <div id="tool-wrap">
                             <p>
-                                <strong>Currently Viewing Template File: </strong><br />
+                                <strong>Currently Viewing Template File: </strong><br/>
 								<?php echo wc_locate_template( $current_email->template_html ); ?>
                             </p>
                             <p class="description">
