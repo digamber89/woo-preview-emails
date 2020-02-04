@@ -211,6 +211,8 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 
 			if ( is_admin() && isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'], 'woocommerce_preview_email' ) ):
 				$condition = false;
+			    WC()->payment_gateways();
+				WC()->shipping();
 				if ( isset( $_POST['choose_email'] ) && ( $_POST['choose_email'] == 'WC_Email_Customer_New_Account' || $_POST['choose_email'] == 'WC_Email_Customer_Reset_Password' ) ) {
 					$condition = true;
 				} elseif ( ( ( isset( $_POST['orderID'] ) && ! empty( $_POST['orderID'] ) ) || ( isset( $_POST['search_order'] ) && ! empty( $_POST['search_order'] ) ) ) && ( isset( $_POST['choose_email'] ) && ! empty( $_POST['choose_email'] ) ) ) {
