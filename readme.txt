@@ -1,5 +1,5 @@
 === Preview E-mails for WooCommerce ===
-Contributors: digamberpradhan
+Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
 Tested up to: 5.3
