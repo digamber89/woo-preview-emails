@@ -8,7 +8,7 @@ Author URI: https://digamberpradhan.com/
 Version: 1.6.4
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 WC requires at least: 3.0.0
-WC tested up to: 4.0.0
+WC tested up to: 4.1.1
 Text Domain: woo-preview-emails
 Domain Path: /languages
 */
