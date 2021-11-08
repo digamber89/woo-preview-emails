@@ -50,39 +50,39 @@ Added compatibility to send preview emails with WooCommerce 5.0.0 and greater
 Added ability to clear email input field
 Input sanitization and escaping for order search field
 
-=1.6.8=
+= 1.6.8 =
 Select2 library updated 
 
-=1.6.6=
+= 1.6.6 =
 Wordpress version and WC version compatibility bump
 
-=1.6.5=
+= 1.6.5 =
 Tested upto WooCommerce 4.1.1
 
-=1.6.4=
+= 1.6.4 =
 Testec upto WooCommerce 4.0.0
 
-=1.6.3=
+= 1.6.3 =
 Enhancement - E-mail instructions should show up for - order with Payment gateways
 
-=1.6.2=
+= 1.6.2 =
 Compatibility update for Pro Add-on for subscription product
 
-=1.6.1=
+= 1.6.1 =
 Show full path for template file instead.
 
-=1.6.0=
+= 1.6.0 =
 Code refactoring and UI and UX changes
 
-=1.5.4=
+= 1.5.4 =
 Correction for untranslated Submit Button
 
-=1.5.3=
+= 1.5.3 =
 - Minor Condition checkings added
 - Removed Email options which is not supported resulting in error generation.
 - Version Bump
 
-=1.5.2=
+= 1.5.2 =
 Compatible with WooCommerce 3.7.1
 
 = 1.5.1 =
