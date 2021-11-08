@@ -2,7 +2,7 @@
 Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
-Tested up to: 5.7
+Tested up to: 5.8.1
 Requires PHP: 7.0
 Stable tag: 2.0.1
 License: GPLv2 or later
