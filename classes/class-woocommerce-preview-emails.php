@@ -228,7 +228,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 
 					/*Make Sure serached order is selected */
 					$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
-					$index           = esc_attr( $_POST['choose_email'] );
+					$index           = sanitize_text_field( $_POST['choose_email'] );
 					$recipient_email = sanitize_text_field( $_POST['email'] );
 
 					if ( is_email( $recipient_email ) ) {
