@@ -42,10 +42,10 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
-=2.0.1=
+= 2.0.1 =
 Sanitize instead of escape when manipulating data
 
-=2.0.0=
+= 2.0.0 =
 Added compatibility to send preview emails with WooCommerce 5.0.0 and greater
 Added ability to clear email input field
 Input sanitization and escaping for order search field
