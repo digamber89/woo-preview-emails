@@ -21,6 +21,6 @@
   "homepage": "https://github.com/digamber89/New-Plugin-Base#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-wp-pot": "^2.3.6"
+    "gulp-wp-pot": "^2.5.0"
   }
 }

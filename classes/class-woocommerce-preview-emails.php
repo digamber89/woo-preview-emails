@@ -38,7 +38,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		/*Ajax Callback to Search Orders*/
 		public function woo_preview_orders_search() {
 
-			$q = filter_input( INPUT_GET, 'q' );
+			$q = sanitize_text_field( filter_input( INPUT_GET, 'q' ) );
 
 			$args     = array(
 				'post_type'      => 'shop_order',
@@ -188,9 +188,9 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		}
 
 		public function generate_form() {
-			$this->choose_email = isset( $_POST['choose_email'] ) ? $_POST['choose_email'] : '';
-			$this->orderID      = isset( $_POST['orderID'] ) ? $_POST['orderID'] : '';
-			$recipient_email    = isset( $_POST['email'] ) ? $_POST['email'] : '';
+			$this->choose_email = isset( $_POST['choose_email'] ) ? sanitize_text_field( $_POST['choose_email'] ) : '';
+			$this->orderID      = isset( $_POST['orderID'] ) ? sanitize_text_field( $_POST['orderID'] ) : '';
+			$recipient_email    = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
 
 			if ( is_admin() && isset( $_POST['preview_email'] ) ) {
 				require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
@@ -211,7 +211,7 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 
 			if ( is_admin() && isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'], 'woocommerce_preview_email' ) ):
 				$condition = false;
-			    WC()->payment_gateways();
+				WC()->payment_gateways();
 				WC()->shipping();
 				if ( isset( $_POST['choose_email'] ) && ( $_POST['choose_email'] == 'WC_Email_Customer_New_Account' || $_POST['choose_email'] == 'WC_Email_Customer_Reset_Password' ) ) {
 					$condition = true;
@@ -229,17 +229,19 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 					/*Make Sure serached order is selected */
 					$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
 					$index           = esc_attr( $_POST['choose_email'] );
-					$recipient_email = $_POST['email'];
+					$recipient_email = sanitize_text_field( $_POST['email'] );
 
 					if ( is_email( $recipient_email ) ) {
-						$this->recipient = $_POST['email'];
+						$this->recipient = $recipient_email;
 					} else {
 						$this->recipient = '';
 					}
 
 					$current_email = $this->emails[ $index ];
 					/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
-					add_filter( 'woocommerce_email_recipient_' . $current_email->id, array( $this, 'no_recipient' ) );
+					add_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
+					// Since WooCommerce 5.0.0 - we require this to make sure emails are resent
+					add_filter( 'woocommerce_new_order_email_allows_resend', '__return_true' );
 
 					$additional_data = apply_filters( 'woo_preview_additional_orderID', false, $index, $orderID, $current_email );
 					if ( $additional_data ) {
@@ -280,7 +282,8 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 					/*Loading Toolbar to display for multiple email templates*/
 
 					/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
-					remove_filter( 'woocommerce_email_recipient_' . $current_email->id, array( $this, 'no_recipient' ) );
+					remove_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
+					remove_filter( 'woocommerce_new_order_email_allows_resend', '__return_true', 10 );
 					?>
                     <div id="tool-options">
                         <div id="tool-wrap">
@@ -311,7 +314,6 @@ if ( ! class_exists( 'WooCommercePreviewEmails' ) ):
 		}
 
 		public function no_recipient( $recipient ) {
-
 			if ( $this->recipient != '' ) {
 				$recipient = $this->recipient;
 			} else {
