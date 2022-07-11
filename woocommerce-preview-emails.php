@@ -5,10 +5,10 @@ Description: An Extension for WooCommerce that lets you Preview Emails, without 
 Plugin URI: https://www.digamberpradhan.com/preview-e-mails-for-woocommerce/
 Author: Digamber Pradhan
 Author URI: https://digamberpradhan.com/
-Version: 2.0.2
+Version: 2.0.3
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 WC requires at least: 3.0.0
-WC tested up to: 6.2.1
+WC tested up to: 6.6.1
 Text Domain: woo-preview-emails
 Domain Path: /languages
 */
