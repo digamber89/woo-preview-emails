@@ -1,5 +1,5 @@
 <script src="<?php echo site_url().'/wp-includes/js/jquery/jquery.js'; ?>" type="text/javascript"></script>
-<script src="<?php echo $this->plugin_url.'/assets/js/select2.min.js'; ?>" type="text/javascript"></script>
+<script src="<?php echo $this->plugin_url.'/assets/select2.min.js'; ?>" type="text/javascript"></script>
 <script type="text/javascript">
 	window.onload = function(){
 		var show_menu = document.getElementById("show_menu");
@@ -15,5 +15,4 @@
 		});
 
 }
-	
 </script>

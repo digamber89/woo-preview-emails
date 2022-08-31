@@ -20,7 +20,7 @@
 			$args = [
 				'post_type'      => 'shop_order',
 				'posts_per_page' => 10,
-				'post_status'    => array_keys( wc_get_order_statuses() )
+				'post_status'    => array_keys( wc_get_order_statuses() ),
 			];
 			?>
             <th>
@@ -56,57 +56,6 @@
                 <p id="search-description" class="description">
 					<?php _e( 'Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90', 'woo-preview-emails' ); ?>
                 </p>
-                <script type="text/javascript">
-                    (function ($) {
-
-                        var searchForm = {
-
-                            init: function () {
-                                this.$form = $('#woocommerce-preview-email');
-                                this.$orderSearchField = this.$form.find('#woo_preview_search_orders');
-                                this.initAjaxSearch();
-                                this.$form.find('#clearEmail').on('click', this.clearEmailField.bind(this))
-
-                            },
-                            initAjaxSearch: function () {
-                                if (typeof ajaxurl === 'undefined') {
-                                    ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
-                                }
-                                this.$orderSearchField.select2({
-                                    placeholder: "Search Orders",
-                                    // data: [{ id:0, text:"something"}, { id:1, text:"something else"}],
-                                    ajax: {
-                                        url: ajaxurl,
-                                        dataType: 'json',
-                                        delay: 250,
-                                        data: function (params) {
-                                            return {
-                                                q: params.term, // search term
-                                                action: 'woo_preview_orders_search'
-                                            };
-                                        },
-                                        processResults: function (data) {
-                                            return {
-                                                results: data
-                                            };
-                                        },
-                                        cache: true
-                                    },
-                                    minimumInputLength: 1
-                                });
-                            },
-                            clearEmailField: function (e) {
-                                e.preventDefault();
-                                this.$form.find('#email').val('');
-                            }
-                        }
-
-                        $(function () {
-                            searchForm.init();
-                        })
-
-                    })(jQuery);
-                </script>
             </td>
         </tr>
         <tr>
@@ -123,3 +72,49 @@
     </table>
     <p><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>
+<script>
+  (function ($) {
+    var searchForm = {
+      init: function () {
+        this.$form = $('#woocommerce-preview-email')
+        this.$orderSearchField = this.$form.find('#woo_preview_search_orders')
+        this.initAjaxSearch()
+        this.$form.find('#clearEmail').on('click', this.clearEmailField.bind(this))
+      },
+      initAjaxSearch: function () {
+        if (typeof ajaxurl === 'undefined') {
+          ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>"
+        }
+        this.$orderSearchField.select2({
+          placeholder: 'Search Orders',
+          // data: [{ id:0, text:"something"}, { id:1, text:"something else"}],
+          ajax: {
+            url: ajaxurl,
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                q: params.term, // search term
+                action: 'woo_preview_orders_search'
+              }
+            },
+            processResults: function (data) {
+              return {
+                results: data
+              }
+            },
+            cache: true
+          },
+          minimumInputLength: 1
+        })
+      },
+      clearEmailField: function (e) {
+        e.preventDefault()
+        this.$form.find('#email').val('')
+      }
+    }
+    $(function () {
+      searchForm.init()
+    })
+  })(jQuery)
+</script>

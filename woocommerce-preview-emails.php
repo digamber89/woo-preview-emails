@@ -12,27 +12,8 @@ WC tested up to: 6.6.1
 Text Domain: woo-preview-emails
 Domain Path: /languages
 */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
 
-if( !defined('WOO_PREVIEW_EMAILS_DIR') ){
-	define('WOO_PREVIEW_EMAILS_DIR', dirname(__FILE__));
-}
-
-if( !defined('WOO_PREVIEW_EMAILS_FILE') ){
-	define('WOO_PREVIEW_EMAILS_FILE', __FILE__);
-}
-
-if( !function_exists('is_woocommerce_active') ){
-	require_once('includes/woo-functions.php');
-}
-
-if( is_woocommerce_active() ){
-	require_once('classes/class-woocommerce-preview-emails.php');
-}
-
-function woo_preview_emails_load_text_domain() {
-    load_plugin_textdomain( 'woo-preview-emails', FALSE, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'plugins_loaded', 'woo_preview_emails_load_text_domain' );
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly
+defined( 'WOO_PREVIEW_EMAILS_DIR' ) || define( 'WOO_PREVIEW_EMAILS_DIR', dirname( __FILE__ ) );
+defined( 'WOO_PREVIEW_EMAILS_FILE' ) || define( 'WOO_PREVIEW_EMAILS_FILE', __FILE__ );
+require_once WOO_PREVIEW_EMAILS_DIR . '/includes/Bootstrap.php';
