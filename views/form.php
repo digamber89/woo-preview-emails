@@ -76,7 +76,7 @@
   (function ($) {
     var searchForm = {
       init: function () {
-        this.$form = $('#woocommerce-preview-email')
+        this.$form = $('.cm-WooPreviewEmai')
         this.$orderSearchField = this.$form.find('#woo_preview_search_orders')
         this.initAjaxSearch()
         this.$form.find('#clearEmail').on('click', this.clearEmailField.bind(this))

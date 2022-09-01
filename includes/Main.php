@@ -19,9 +19,10 @@ class Main {
 
 	public function __construct() {
 		$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
-		add_action( 'init', [ $this, 'load_email_classes' ], 999 );
-		add_action( 'admin_init', [ $this, 'generate_result' ], 20 );
 		add_action( 'admin_menu', [ $this, 'add_preview_mail_page' ], 90 );
+		add_action( 'init', [ $this, 'load_email_classes' ], 999 );
+		//generates result
+		add_action( 'admin_init', [ $this, 'output_result' ], 20 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ], 10, 1 );
 		add_action( 'wp_ajax_woo_preview_orders_search', [ $this, 'get_orders' ] );
 	}
@@ -106,13 +107,18 @@ class Main {
 
 	/*Ajax Callback to Search Orders*/
 	public function get_orders() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
 		$q        = sanitize_text_field( filter_input( INPUT_GET, 'q' ) );
-		$args     = array(
+		$args     = [
 			'post_type'      => 'shop_order',
 			'posts_per_page' => 10,
 			'post_status'    => array_keys( wc_get_order_statuses() ),
 			'post__in'       => [ $q ],
-		);
+		];
 		$response = array();
 		$orders   = new \WP_Query( $args );
 		while ( $orders->have_posts() ):
@@ -203,26 +209,32 @@ class Main {
 		}
 	}
 
-	public function generate_result() {
+	public function output_result() {
 
-		if ( is_admin() && isset( $_POST['preview_email'] ) && wp_verify_nonce( $_POST['preview_email'], 'woocommerce_preview_email' ) ):
-			$condition = false;
+		$preview_email = filter_input( INPUT_POST, 'preview_email' );
+		$choose_email  = filter_input( INPUT_POST, 'choose_email' );
+		$order_id      = filter_input( INPUT_POST, 'orderID' );
+
+		if ( is_admin() && wp_verify_nonce( $preview_email, 'woocommerce_preview_email' ) ):
+			$show_email = false;
+			//need to be called to get shipping and payment gateways data
 			WC()->payment_gateways();
 			WC()->shipping();
-			if ( isset( $_POST['choose_email'] ) && ( $_POST['choose_email'] == 'WC_Email_Customer_New_Account' || $_POST['choose_email'] == 'WC_Email_Customer_Reset_Password' ) ) {
-				$condition = true;
-			} elseif ( ( ( isset( $_POST['orderID'] ) && ! empty( $_POST['orderID'] ) ) || ( isset( $_POST['search_order'] ) && ! empty( $_POST['search_order'] ) ) ) && ( isset( $_POST['choose_email'] ) && ! empty( $_POST['choose_email'] ) ) ) {
-				$condition = true;
+
+			if ( ( $choose_email == 'WC_Email_Customer_New_Account' || $choose_email == 'WC_Email_Customer_Reset_Password' ) ) {
+				$show_email = true;
+			} elseif ( ( ! empty( $_POST['orderID'] ) || ! empty( $_POST['search_order'] ) ) && ( ! empty( $choose_email ) ) ) {
+				$show_email = true;
 			}
 
-			if ( $condition == true ) {
+			if ( $show_email ) {
 				$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
 
 				/*Load the styles and scripts*/
 				require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';
 				require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/scripts.php';
 
-				/*Make Sure serached order is selected */
+				/*Make Sure searched order is selected */
 				$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
 				$index           = sanitize_text_field( $_POST['choose_email'] );
 				$recipient_email = sanitize_text_field( $_POST['email'] );
@@ -234,11 +246,12 @@ class Main {
 				}
 
 				$current_email = $this->emails[ $index ];
-				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
+				
+                /*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 				add_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
+
 				// Since WooCommerce 5.0.0 - we require this to make sure emails are resent
 				add_filter( 'woocommerce_new_order_email_allows_resend', '__return_true' );
-
 				$additional_data = apply_filters( 'woo_preview_additional_orderID', false, $index, $orderID, $current_email );
 				if ( $additional_data ) {
 					do_action( 'woo_preview_additional_order_trigger', $current_email, $additional_data );
@@ -262,7 +275,6 @@ class Main {
 							/* Pick the first one as an example */
 							$subscription = array_pop( $order_subscriptions );
 							$current_email->trigger( $subscription );
-
 						} else {
 							$current_email->trigger( $orderID, wc_get_order( $orderID ) );
 						}
@@ -273,7 +285,6 @@ class Main {
 
 				$content = $current_email->get_content_html();
 				$content = apply_filters( 'woocommerce_mail_content', $current_email->style_inline( $content ) );
-				echo $content;
 				/*This ends the content for email to be previewed*/
 				/*Loading Toolbar to display for multiple email templates*/
 
@@ -281,24 +292,27 @@ class Main {
 				remove_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
 				remove_filter( 'woocommerce_new_order_email_allows_resend', '__return_true', 10 );
 				?>
-                <div id="tool-options">
-                    <div id="tool-wrap">
-                        <p>
-                            <strong>Currently Viewing Template File: </strong><br/>
-							<?php echo wc_locate_template( $current_email->template_html ); ?>
-                        </p>
-                        <p class="description">
-                            <strong> Descripton: </strong>
-							<?php echo $current_email->description; ?>
-                        </p>
-						<?php $this->generate_form(); ?>
-                        <!-- admin url was broken -->
-                        <a class="button" href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
+                    <div class="cm-WooPreviewEmail">
+                        <div id="tool-options">
+                            <div id="tool-wrap">
+                                <p>
+                                    <strong>Currently Viewing Template File: </strong><br/>
+				                    <?php echo wc_locate_template( $current_email->template_html ); ?>
+                                </p>
+                                <p class="description">
+                                    <strong> Descripton: </strong>
+				                    <?php echo $current_email->description; ?>
+                                </p>
+			                    <?php $this->generate_form(); ?>
+                                <!-- admin url was broken -->
+                                <a class="button" href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
+                            </div>
+                        </div>
+                        <div class="cm-WooPreviewEmail-emailContent">
+	                        <?php echo $content; ?>
+                        </div>
                     </div>
-                </div>
-                <div class="menu-toggle-wrapper">
-                    <a href="#" id="show_menu" class="show_menu">Show Menu</a>
-                </div>
+                
 				<?php
 				die;
 			} else {

@@ -1,4 +1,18 @@
-#woocommerce-preview-email select {
+.cm-WooPreviewEmail {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cm-WooPreviewEmail #tool-options {
+    width: 30%;
+    padding: 2em;
+}
+
+.cm-WooPreviewEmail-emailContent {
+    flex-grow: 1;
+}
+
+.cm-WooPreviewEmail select {
     font-size: 14px;
     line-height: 2;
     color: #32373c;
@@ -14,7 +28,8 @@
     cursor: pointer;
     vertical-align: middle;
 }
-#woocommerce-preview-email .button-primary {
+
+.cm-WooPreviewEmail .button-primary {
     background: #007cba;
     border-color: #007cba;
     color: #fff;
@@ -34,67 +49,36 @@
     white-space: nowrap;
     box-sizing: border-box;
 }
-#woocommerce-preview-email .regular-text {
+
+.cm-WooPreviewEmail .regular-text {
     width: 25em;
 }
-#woocommerce-preview-email input[type=date],
-#woocommerce-preview-email input[type=datetime-local],
-#woocommerce-preview-email input[type=datetime],
-#woocommerce-preview-email input[type=email],
-#woocommerce-preview-email input[type=month],
-#woocommerce-preview-email input[type=number],
-#woocommerce-preview-email input[type=password],
-#woocommerce-preview-email input[type=search],
-#woocommerce-preview-email input[type=tel],
-#woocommerce-preview-email input[type=text],
-#woocommerce-preview-email input[type=time],
-#woocommerce-preview-email input[type=url],
-#woocommerce-preview-email input[type=week] {
+
+
+.cm-WooPreviewEmail input[type=date],
+.cm-WooPreviewEmail input[type=datetime-local],
+.cm-WooPreviewEmail input[type=datetime],
+.cm-WooPreviewEmail input[type=email],
+.cm-WooPreviewEmail input[type=month],
+.cm-WooPreviewEmail input[type=number],
+.cm-WooPreviewEmail input[type=password],
+.cm-WooPreviewEmail input[type=search],
+.cm-WooPreviewEmail input[type=tel],
+.cm-WooPreviewEmail input[type=text],
+.cm-WooPreviewEmail input[type=time],
+.cm-WooPreviewEmail input[type=url],
+.cm-WooPreviewEmail input[type=week] {
     padding: 0 8px;
     line-height: 2;
     min-height: 30px;
     font-size: 14px;
     width: 25em;
 }
+
 #search-description {
     display: none;
 }
 
-#tool-options {
-    width: 50%;
-    background: #fff;
-    border: none;
-    box-shadow: 0 0 12px 1px #2c2c2c;
-    position: fixed;
-    top: -100%;
-    left: 50%;
-    transition: all 0.3s ease-in-out;
-    transform: translateX(-50%);
-    opacity: 0;
-
-}
-
-#tool-options.active {
-    top: 10%;
-    opacity: 1;
-}
-
-#tool-wrap {
-    position: relative;
-    padding: 10px 20px;
-}
-
 #tool-wrap table select, input[type='email'] {
     width: 100%;
-}
-
-#show_menu {
-    text-decoration: none;
-    padding: 10px;
-    color: #000;
-    position: fixed;
-    top: 10%;
-    left: 5%;
-    background: #fff;
-    border: 2px solid;
 }
