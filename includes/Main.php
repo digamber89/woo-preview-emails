@@ -22,7 +22,7 @@ class Main {
 		add_action( 'admin_menu', [ $this, 'add_preview_mail_page' ], 90 );
 		add_action( 'init', [ $this, 'load_email_classes' ], 999 );
 		//generates result
-		add_action( 'admin_init', [ $this, 'output_result' ], 20 );
+		add_action( 'admin_init', [ $this, 'email_preview_output' ], 20 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ], 10, 1 );
 		add_action( 'wp_ajax_woo_preview_orders_search', [ $this, 'get_orders' ] );
 	}
@@ -164,11 +164,11 @@ class Main {
 			__( 'Preview Emails', 'woo-preview-emails' ),
 			apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ),
 			'codemanas-woocommerce-preview-emails',
-			[ $this, 'generate_page' ]
+			[ $this, 'generate_the_admin_page' ]
 		);
 	}
 
-	public function generate_page() {
+	public function generate_the_admin_page() {
 		?>
         <div class="wrap">
             <h2>Woo Preview Emails</h2>
@@ -185,7 +185,6 @@ class Main {
                     <p><strong><?php _e( "Note: E-mails require orders to exist before you can preview them", 'woo-preview-emails' ); ?></strong></p>
                 </div>
 			<?php } ?>
-
 			<?php $this->generate_form(); ?>
         </div>
 		<?php
@@ -209,7 +208,7 @@ class Main {
 		}
 	}
 
-	public function output_result() {
+	public function email_preview_output() {
 
 		$preview_email = filter_input( INPUT_POST, 'preview_email' );
 		$choose_email  = filter_input( INPUT_POST, 'choose_email' );
@@ -230,10 +229,6 @@ class Main {
 			if ( $show_email ) {
 				$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
 
-				/*Load the styles and scripts*/
-				require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';
-				require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/scripts.php';
-
 				/*Make Sure searched order is selected */
 				$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
 				$index           = sanitize_text_field( $_POST['choose_email'] );
@@ -246,8 +241,8 @@ class Main {
 				}
 
 				$current_email = $this->emails[ $index ];
-				
-                /*The Woo Way to Do Things Need Exception Handling Edge Cases*/
+
+				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 				add_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
 
 				// Since WooCommerce 5.0.0 - we require this to make sure emails are resent
@@ -287,32 +282,54 @@ class Main {
 				$content = apply_filters( 'woocommerce_mail_content', $current_email->style_inline( $content ) );
 				/*This ends the content for email to be previewed*/
 				/*Loading Toolbar to display for multiple email templates*/
-
 				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 				remove_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
 				remove_filter( 'woocommerce_new_order_email_allows_resend', '__return_true', 10 );
 				?>
-                    <div class="cm-WooPreviewEmail">
-                        <div id="tool-options">
-                            <div id="tool-wrap">
-                                <p>
-                                    <strong>Currently Viewing Template File: </strong><br/>
-				                    <?php echo wc_locate_template( $current_email->template_html ); ?>
-                                </p>
-                                <p class="description">
-                                    <strong> Descripton: </strong>
-				                    <?php echo $current_email->description; ?>
-                                </p>
-			                    <?php $this->generate_form(); ?>
-                                <!-- admin url was broken -->
-                                <a class="button" href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
-                            </div>
-                        </div>
-                        <div class="cm-WooPreviewEmail-emailContent">
-	                        <?php echo $content; ?>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+					<?php
+					/*Load the styles and scripts*/
+					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';
+					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/scripts.php';
+					?>
+                </head>
+                <body class="digthis">
+                <div class="cm-WooPreviewEmail">
+                    <div id="tool-options">
+                        <div id="tool-wrap">
+                            <p>
+                                <strong>Currently Viewing Template File: </strong><br/>
+								<?php echo wc_locate_template( $current_email->template_html ); ?>
+                            </p>
+                            <p class="description">
+                                <strong> Descripton: </strong>
+								<?php echo $current_email->description; ?>
+                            </p>
+							<?php $this->generate_form(); ?>
+                            <!-- admin url was broken -->
+                            <a class="button" href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
                         </div>
                     </div>
-                
+                    <div class="cm-WooPreviewEmail-emailContent">
+						<?php echo $content; ?>
+                    </div>
+                    <div class="tool-bar-toggler">
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+                            </svg>
+                            <span class="hide-controls">Hide Controls</span>
+                            <span class="show-controls">Show Controls</span>
+                        </a>
+                    </div>
+                </div>
+
+                </body>
+                </html>
 				<?php
 				die;
 			} else {

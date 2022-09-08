@@ -1,18 +1,72 @@
 .cm-WooPreviewEmail {
     display: flex;
     flex-wrap: wrap;
+    transition: 0.8s all;
 }
+
+.cm-WooPreviewEmail .tool-bar-toggler {
+    left: 25%;
+    position: fixed;
+    top: 0;
+    padding: 1em;
+    min-width: 200px;
+    transition: 0.4s all;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler.hidden {
+    left: 0;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler.hidden svg {
+    rotate: 180deg;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler .show-controls,
+.cm-WooPreviewEmail .tool-bar-toggler.hidden .hide-controls {
+    display: none;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler.hidden .show-controls {
+    display: inline-block;
+}
+
+.cm-WooPreviewEmail div#tool-options.hidden {
+    display: none;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler svg {
+    width: 14px;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler a,
+.cm-WooPreviewEmail .tool-bar-toggler a:visited {
+    text-decoration: none;
+    color: #646970;
+}
+
+.cm-WooPreviewEmail .tool-bar-toggler a:hover {
+    color: #2271b1;
+}
+
 
 .cm-WooPreviewEmail #tool-options {
     width: 30%;
     padding: 2em;
 }
 
+.cm-WooPreviewEmail #tool-options #email {
+    max-width: 75%;
+}
+
+.cm-WooPreviewEmail #tool-options #clearEmail {
+    padding: 0.15em 1em;
+}
+
 .cm-WooPreviewEmail-emailContent {
     flex-grow: 1;
 }
 
-.cm-WooPreviewEmail select {
+.cm-WooPreviewEmail #tool-options select {
     font-size: 14px;
     line-height: 2;
     color: #32373c;
@@ -29,7 +83,7 @@
     vertical-align: middle;
 }
 
-.cm-WooPreviewEmail .button-primary {
+.cm-WooPreviewEmail #tool-options .button-primary {
     background: #007cba;
     border-color: #007cba;
     color: #fff;
@@ -50,24 +104,24 @@
     box-sizing: border-box;
 }
 
-.cm-WooPreviewEmail .regular-text {
+.cm-WooPreviewEmail #tool-options .regular-text {
     width: 25em;
 }
 
 
-.cm-WooPreviewEmail input[type=date],
-.cm-WooPreviewEmail input[type=datetime-local],
-.cm-WooPreviewEmail input[type=datetime],
-.cm-WooPreviewEmail input[type=email],
-.cm-WooPreviewEmail input[type=month],
-.cm-WooPreviewEmail input[type=number],
-.cm-WooPreviewEmail input[type=password],
-.cm-WooPreviewEmail input[type=search],
-.cm-WooPreviewEmail input[type=tel],
-.cm-WooPreviewEmail input[type=text],
-.cm-WooPreviewEmail input[type=time],
-.cm-WooPreviewEmail input[type=url],
-.cm-WooPreviewEmail input[type=week] {
+.cm-WooPreviewEmail #tool-options input[type=date],
+.cm-WooPreviewEmail #tool-options input[type=datetime-local],
+.cm-WooPreviewEmail #tool-options input[type=datetime],
+.cm-WooPreviewEmail #tool-options input[type=email],
+.cm-WooPreviewEmail #tool-options input[type=month],
+.cm-WooPreviewEmail #tool-options input[type=number],
+.cm-WooPreviewEmail #tool-options input[type=password],
+.cm-WooPreviewEmail #tool-options input[type=search],
+.cm-WooPreviewEmail #tool-options input[type=tel],
+.cm-WooPreviewEmail #tool-options input[type=text],
+.cm-WooPreviewEmail #tool-options input[type=time],
+.cm-WooPreviewEmail #tool-options input[type=url],
+.cm-WooPreviewEmail #tool-options input[type=week] {
     padding: 0 8px;
     line-height: 2;
     min-height: 30px;
@@ -75,10 +129,17 @@
     width: 25em;
 }
 
-#search-description {
+#tool-options #search-description {
     display: none;
 }
 
-#tool-wrap table select, input[type='email'] {
-    width: 100%;
+#tool-wrap table select, input[type='email'] { width: 100%; }
+
+#tool-options table th { text-align: left; }
+
+
+@media screen and (max-width: 767px) {
+    .cm-WooPreviewEmail #tool-options, .cm-WooPreviewEmail-emailContent {
+        width: 100%;
+    }
 }

@@ -43,7 +43,7 @@
         <tr>
             <th><label for="woo_preview_search_orders"><?php _e( 'Search Orders', 'woo-preview-emails' ); ?></label></th>
             <td>
-                <select name="search_order" id="woo_preview_search_orders" class="woo_preview_search_orders" class="regular-text" style="width: 35%;">
+                <select name="search_order" id="woo_preview_search_orders" class="regular-text" class="regular-text">
 					<?php
 					if ( ! empty( $_POST['search_order'] ) ) {
 						?>
@@ -66,7 +66,7 @@
             </th>
             <td>
                 <input type="email" name="email" id="email" class="regular-text" value="<?php echo $this->recipient; ?>"/>
-                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear X"/>
+                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear"/>
             </td>
         </tr>
     </table>
@@ -76,7 +76,7 @@
   (function ($) {
     var searchForm = {
       init: function () {
-        this.$form = $('.cm-WooPreviewEmai')
+        this.$form = $('#woocommerce-preview-email')
         this.$orderSearchField = this.$form.find('#woo_preview_search_orders')
         this.initAjaxSearch()
         this.$form.find('#clearEmail').on('click', this.clearEmailField.bind(this))
@@ -85,9 +85,11 @@
         if (typeof ajaxurl === 'undefined') {
           ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>"
         }
+        this.$form.find('#choose_email').select2({ placeholder: 'Choose Email', allowClear: true })
+        this.$form.find('#orderID').select2({ placeholder: 'Choose Order', allowClear: true })
         this.$orderSearchField.select2({
           placeholder: 'Search Orders',
-          // data: [{ id:0, text:"something"}, { id:1, text:"something else"}],
+          allowClear: true,
           ajax: {
             url: ajaxurl,
             dataType: 'json',
