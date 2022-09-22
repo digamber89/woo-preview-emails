@@ -306,7 +306,7 @@ class Main {
 								<?php echo wc_locate_template( $current_email->template_html ); ?>
                             </p>
                             <p class="description">
-                                <strong> Descripton: </strong>
+                                <strong> Description: </strong>
 								<?php echo $current_email->description; ?>
                             </p>
 							<?php $this->generate_form(); ?>
