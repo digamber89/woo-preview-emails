@@ -69,6 +69,7 @@ class Main {
 					'WC_Memberships_User_Membership_Ending_Soon_Email',
 					'WC_Memberships_User_Membership_Ended_Email',
 					'WC_Memberships_User_Membership_Renewal_Reminder_Email',
+					'WC_Memberships_User_Membership_Activated_Email',
 				);
 
 				$unset_booking_emails      = apply_filters( 'woo_preview_emails_unset_booking_emails', $unset_booking_emails );
