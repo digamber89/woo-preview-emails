@@ -25,7 +25,25 @@ class Main {
 		add_action( 'admin_init', [ $this, 'email_preview_output' ], 20 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ], 10, 1 );
 		add_action( 'wp_ajax_woo_preview_orders_search', [ $this, 'get_orders' ] );
+		add_filter( 'plugin_action_links_woo-preview-emails/woocommerce-preview-emails.php', [$this, 'settings_link'] );
 	}
+
+	public function settings_link( $links ) {
+		// Build and escape the URL.
+		$url = esc_url( add_query_arg(
+			'page',
+			'codemanas-woocommerce-preview-emails',
+			get_admin_url() . 'admin.php'
+		) );
+		// Create the link.
+		$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+		// Adds the link to the end of the array.
+		array_push(
+			$links,
+			$settings_link
+		);
+		return $links;
+    }
 
 	/**
 	 * @return void
