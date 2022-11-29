@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Preview E-mails for WooCommerce
+# Copyright (C) 2022 Preview E-mails for WooCommerce
 # This file is distributed under the same license as the Preview E-mails for WooCommerce package.
 msgid ""
 msgstr ""
@@ -12,18 +12,6 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: classes/class-woocommerce-preview-emails.php:164
-msgid "Preview Emails"
-msgstr ""
-
-#: classes/class-woocommerce-preview-emails.php:181
-msgid "Note: E-mails require orders to exist before you can preview them"
-msgstr ""
-
-#: classes/class-woocommerce-preview-emails.php:295
-msgid "Back to Admin Area"
-msgstr ""
 
 #: views/form.php:7, views/form.php:11
 msgid "Choose Email"
@@ -41,10 +29,10 @@ msgstr ""
 msgid "Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90"
 msgstr ""
 
-#: views/form.php:93
+#: views/form.php:64
 msgid "Mail to"
 msgstr ""
 
-#: views/form.php:101
+#: views/form.php:73
 msgid "Submit"
 msgstr ""
