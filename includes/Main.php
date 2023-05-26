@@ -127,7 +127,7 @@ class Main {
 	/*Ajax Callback to Search Orders*/
 	public function get_orders() {
 
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			return false;
 		}
 
