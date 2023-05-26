@@ -2,9 +2,9 @@
 Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
-Tested up to: 6.0.2
+Tested up to: 6.2.2
 Requires PHP: 7.4
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+= 2.1.2 =
+- Feature: Allow Shop manager to get orders by default.
+
 = 2.1.1 = 
 - Added plugin settings page link
 - Some typographic error removed
@@ -64,7 +67,7 @@ Input sanitization and escaping for order search field
 Select2 library updated 
 
 = 1.6.6 =
-Wordpress version and WC version compatibility bump
+WordPress version and WC version compatibility bump
 
 = 1.6.5 =
 Tested upto WooCommerce 4.1.1
