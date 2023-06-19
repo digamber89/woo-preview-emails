@@ -21,6 +21,7 @@
 				'posts_per_page' => 10,
 				'post_status'    => array_keys( wc_get_order_statuses() ),
 			];
+			$orders = wc_get_orders( $args );
 			?>
             <th>
                 <label for="orderID">
@@ -28,15 +29,18 @@
                 </label>
             </th>
             <td>
+                <?php if(!empty($orders)): ?>
                 <select name="orderID" id="orderID" class="regular-text">
                     <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
 					<?php
-					$orders = wc_get_orders( $args );
 					foreach ( $orders as $order ) {
 						?>
                         <option value="<?php echo $order->ID ?>" <?php selected( $order->ID, $this->orderID ); ?> >#order : <?php echo $order->ID; ?></option>
 					<?php } ?>
                 </select>
+                <?php else: ?>
+                <?php esc_html_e('There are currently no orders on your site - please add some orders first','woo-preview-emails'); ?>
+                <?php endif; ?>
             </td>
         </tr>
         <tr>
