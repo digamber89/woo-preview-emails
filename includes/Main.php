@@ -3,17 +3,16 @@
 namespace Codemanas\WooPreviewEmails;
 
 class Main {
-	/**
-	 * @var null
-	 */
-	public static $instance = null;
-	private $plugin_url, $choose_email, $orderID, $recipient;
+	public static ?Main $instance = null;
+	private $orderID, $recipient;
+	private string $plugin_url;
 	public $emails = null, $notice_message = null, $notice_class = null;
+	private string $choose_email;
 
 	/**
 	 * @return Main|null
 	 */
-	public static function get_instance() {
+	public static function get_instance(): ?Main {
 		return is_null( self::$instance ) ? self::$instance = new self() : self::$instance;
 	}
 
@@ -219,7 +218,7 @@ class Main {
 			require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
 		} else {
 			do_action( 'woo_preview_emails_before_form' );
-			//Custom tab implmentation
+			//Custom tab implementation
 			$tabs = apply_filters( 'woo_preview_emails_tabs', false );
 			if ( ! $tabs ) {
 				require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
