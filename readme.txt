@@ -4,7 +4,7 @@ Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
 Tested up to: 6.2.2
 Requires PHP: 7.4
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+= 2.1.3 =
+- Feature: Update for upcoming High-Performance Order Storage(HPOS) compatibility
+
 = 2.1.2 =
 - Feature: Allow Shop manager to get orders by default.
 
