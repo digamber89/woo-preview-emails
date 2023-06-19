@@ -310,6 +310,7 @@ class Main {
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <title><?php _e( 'Previewing Emails', 'woo-preview-emails' ); ?></title>
 					<?php
 					/*Load the styles and scripts*/
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';
