@@ -127,27 +127,21 @@ class Main {
 
 	/*Ajax Callback to Search Orders*/
 	public function get_orders() {
-
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			return false;
 		}
 
 		$q        = sanitize_text_field( filter_input( INPUT_GET, 'q' ) );
-		$args     = [
-			'post_type'      => 'shop_order',
-			'posts_per_page' => 10,
-			'post_status'    => array_keys( wc_get_order_statuses() ),
-			'post__in'       => [ $q ],
-		];
-		$response = array();
-		$orders   = new \WP_Query( $args );
-		while ( $orders->have_posts() ):
-			$orders->the_post();
-			$id         = get_the_id();
-			$response[] = array( 'id' => $id, 'text' => '#order :' . $id );
-		endwhile;
+		$response = [];
+		$order    = wc_get_order( $q );
+		if ( $order ) {
+			$id         = $order->get_id();
+			$response[] = [ 'id' => $id, 'text' => '#order :' . $id ];
+
+		}
 		wp_reset_postdata();
 		wp_send_json( $response );
+		die;
 	}
 
 	/**
@@ -170,7 +164,7 @@ class Main {
 	 */
 	public function adminNotices() {
 		?>
-		<div class="<?php echo $this->notice_class; ?>"><p><?php echo $this->notice_message; ?></p></div>
+        <div class="<?php echo $this->notice_class; ?>"><p><?php echo $this->notice_message; ?></p></div>
 		<?php
 	}
 
@@ -190,29 +184,29 @@ class Main {
 
 	public function generate_the_admin_page() {
 		?>
-		<div class="wrap">
-			<h2>Woo Preview Emails</h2>
+        <div class="wrap">
+            <h2>Woo Preview Emails</h2>
 			<?php
 			if ( ! in_array( 'woo-preview-emails-pro-addon/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				?>
-				<div id="message" class="notice notice-warning">
-					<h3>Need more features ?</h3>
-					<p>
-						<a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the
-							pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription
-						templates.</p>
-				</div>
-				<div id="message" class="notice notice-warning">
-					<p>If you have found this plugin useful, please leave a <a
-							href="https://wordpress.org/support/plugin/woo-preview-emails/reviews/#new-post"
-							target="_blank">review</a>
-					<p>
-						<strong><?php _e( "Note: E-mails require orders to exist before you can preview them", 'woo-preview-emails' ); ?></strong>
-					</p>
-				</div>
+                <div id="message" class="notice notice-warning">
+                    <h3>Need more features ?</h3>
+                    <p>
+                        <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the
+                            pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription
+                        templates.</p>
+                </div>
+                <div id="message" class="notice notice-warning">
+                    <p>If you have found this plugin useful, please leave a <a
+                                href="https://wordpress.org/support/plugin/woo-preview-emails/reviews/#new-post"
+                                target="_blank">review</a>
+                    <p>
+                        <strong><?php _e( "Note: E-mails require orders to exist before you can preview them", 'woo-preview-emails' ); ?></strong>
+                    </p>
+                </div>
 			<?php } ?>
 			<?php $this->generate_form(); ?>
-		</div>
+        </div>
 		<?php
 	}
 
@@ -312,52 +306,52 @@ class Main {
 				remove_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
 				remove_filter( 'woocommerce_new_order_email_allows_resend', '__return_true', 10 );
 				?>
-				<!DOCTYPE html>
-				<html>
-				<head>
-					<meta charset="UTF-8">
-					<meta name="viewport" content="width=device-width, initial-scale=1">
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
 					<?php
 					/*Load the styles and scripts*/
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/scripts.php';
 					?>
-				</head>
-				<body class="digthis">
-				<div class="cm-WooPreviewEmail">
-					<div id="tool-options">
-						<div id="tool-wrap">
-							<p>
-								<strong>Currently Viewing Template File: </strong><br/>
+                </head>
+                <body class="digthis">
+                <div class="cm-WooPreviewEmail">
+                    <div id="tool-options">
+                        <div id="tool-wrap">
+                            <p>
+                                <strong>Currently Viewing Template File: </strong><br/>
 								<?php echo wc_locate_template( $current_email->template_html ); ?>
-							</p>
-							<p class="description">
-								<strong> Description: </strong>
+                            </p>
+                            <p class="description">
+                                <strong> Description: </strong>
 								<?php echo $current_email->description; ?>
-							</p>
+                            </p>
 							<?php $this->generate_form(); ?>
-							<!-- admin url was broken -->
-							<a class="button"
-							   href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
-						</div>
-					</div>
-					<div class="cm-WooPreviewEmail-emailContent">
+                            <!-- admin url was broken -->
+                            <a class="button"
+                               href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
+                        </div>
+                    </div>
+                    <div class="cm-WooPreviewEmail-emailContent">
 						<?php echo $content; ?>
-					</div>
-					<div class="tool-bar-toggler">
-						<a href="#">
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-							     stroke="currentColor" class="w-6 h-6">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
-							</svg>
-							<span class="hide-controls">Hide Controls</span>
-							<span class="show-controls">Show Controls</span>
-						</a>
-					</div>
-				</div>
+                    </div>
+                    <div class="tool-bar-toggler">
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+                            </svg>
+                            <span class="hide-controls">Hide Controls</span>
+                            <span class="show-controls">Show Controls</span>
+                        </a>
+                    </div>
+                </div>
 
-				</body>
-				</html>
+                </body>
+                </html>
 				<?php
 				die;
 			} else {
