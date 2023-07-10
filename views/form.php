@@ -34,8 +34,9 @@
                     <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
 					<?php
 					foreach ( $orders as $order ) {
+                        $order_id = $order->get_id()
 						?>
-                        <option value="<?php echo $order->ID ?>" <?php selected( $order->ID, $this->orderID ); ?> >#order : <?php echo $order->ID; ?></option>
+                        <option value="<?php echo $order_id ?>" <?php selected( $order_id, $this->orderID ); ?> >#order : <?php echo $order_id; ?></option>
 					<?php } ?>
                 </select>
                 <?php else: ?>
