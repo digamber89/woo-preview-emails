@@ -4,7 +4,7 @@ Tags: WooCommerce, Emails, Preview
 Requires at least: 3.8
 Tested up to: 6.2.2
 Requires PHP: 7.4
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
