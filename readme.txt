@@ -42,6 +42,9 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+= 2.1.5 =
+- Enhancement: Show 3rd party template locations correctly
+
 = 2.1.4 =
 - Fix: Use get_id instead of directly accessing order id.
 
