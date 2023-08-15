@@ -260,6 +260,15 @@ class Main {
 				}
 
 				$current_email = $this->emails[ $index ];
+				//template
+				$template                = $current_email->get_template( 'template_html' );
+				$local_file              = $current_email->get_theme_template_file( $template );
+				$core_file               = $current_email->template_base . $template;
+				$template_file           = apply_filters( 'woocommerce_locate_core_template', $core_file, $template, $current_email->template_base, $current_email->id );
+				$template_dir            = apply_filters( 'woocommerce_template_directory', 'woocommerce', $template );
+				$base_template_location  = plugin_basename( $template_file );
+				$currently_used_template = file_exists( $local_file ) ? trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template : $base_template_location;
+
 
 				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 				add_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
@@ -323,7 +332,7 @@ class Main {
                         <div id="tool-wrap">
                             <p>
                                 <strong>Currently Viewing Template File: </strong><br/>
-								<?php echo wc_locate_template( $current_email->template_html ); ?>
+								<?php echo esc_html( $currently_used_template ); ?>
                             </p>
                             <p class="description">
                                 <strong> Description: </strong>
