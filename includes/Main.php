@@ -28,7 +28,17 @@ class Main {
 			$this,
 			'settings_link'
 		], 20 );
+
+        //HPOS Compatibility
+		add_action( 'before_woocommerce_init', [$this,'hpos_compatible'] );
 	}
+
+    //mark as HPOS compatibility
+    public function hpos_compatible() {
+	    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		    \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WOO_PREVIEW_EMAILS_FILE, true );
+	    }
+    }
 
 	public function settings_link( $links ) {
 		// Build and escape the URL.
