@@ -4,7 +4,7 @@ Tags: WooCommerce, Emails, Preview
 Requires at least: 6.0
 Tested up to: 6.3.0
 Requires PHP: 7.4
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+= 2.1.6 =
+Dev: Declare [HPOS compatibility](https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility)
+
 = 2.1.5 =
 - Enhancement: Show 3rd party template locations correctly
 
