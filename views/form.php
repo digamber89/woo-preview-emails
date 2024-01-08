@@ -1,3 +1,8 @@
+<?php
+extract($args);
+
+?>
+
 <form id="woocommerce-preview-email" action="" method="post" data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
     <table class="form-table">
         <tr>
@@ -9,8 +14,8 @@
             <td>
                 <select id="choose_email" name="choose_email" class="regular-text">
                     <option value=""><?php _e( 'Choose Email', 'woo-preview-emails' ); ?></option>
-					<?php foreach ( $this->emails as $index => $email ): ?>
-                        <option value="<?php echo $index ?>" <?php selected( $index, $this->choose_email ); ?>><?php echo $email->title; ?></option>
+					<?php foreach ( $emails as $index => $email ): ?>
+                        <option value="<?php echo $index ?>" <?php selected( $index, $choose_email ); ?>><?php echo $email->title; ?></option>
 					<?php endforeach; ?>
                 </select>
             </td>
@@ -36,7 +41,7 @@
 						foreach ( $orders as $order ) {
 							$order_id = $order->get_id()
 							?>
-                            <option value="<?php echo $order_id ?>" <?php selected( $order_id, $this->orderID ); ?> >#order : <?php echo $order_id; ?></option>
+                            <option value="<?php echo $order_id ?>" <?php selected( $order_id, $orderID ); ?> >#order : <?php echo $order_id; ?></option>
 						<?php } ?>
                     </select>
 				<?php else: ?>
@@ -69,7 +74,7 @@
                 </label>
             </th>
             <td>
-                <input type="email" name="email" id="email" class="regular-text" value="<?php echo $this->recipient; ?>"/>
+                <input type="email" name="email" id="email" class="regular-text" value="<?php echo $recipient; ?>"/>
                 <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear"/>
             </td>
         </tr>

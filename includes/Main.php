@@ -4,7 +4,7 @@ namespace Codemanas\WooPreviewEmails;
 
 class Main {
 	public static ?Main $instance = null;
-	private $orderID, $recipient;
+	private $recipient;
 	private string $plugin_url;
 	public $emails = null, $notice_message = null, $notice_class = null;
 	private string $choose_email;
@@ -170,17 +170,30 @@ class Main {
 
 	public function generate_form() {
 		$this->choose_email = isset( $_POST['choose_email'] ) ? sanitize_text_field( $_POST['choose_email'] ) : '';
-		$this->orderID      = isset( $_POST['orderID'] ) ? sanitize_text_field( $_POST['orderID'] ) : '';
+		$orderID            = isset( $_POST['orderID'] ) ? sanitize_text_field( $_POST['orderID'] ) : '';
 		$recipient_email    = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
 
 		if ( is_admin() && isset( $_POST['preview_email'] ) ) {
-			require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
+			load_template( WOO_PREVIEW_EMAILS_DIR . '/views/form.php', true,
+				[
+					'emails'       => $this->emails,
+					'orderID'      => $orderID,
+					'recipient'    => $this->recipient,
+					'choose_email' => $this->choose_email
+				] );
+//			require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
 		} else {
 			do_action( 'woo_preview_emails_before_form' );
 			//Custom tab implementation
 			$tabs = apply_filters( 'woo_preview_emails_tabs', false );
 			if ( ! $tabs ) {
-				require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
+				load_template( WOO_PREVIEW_EMAILS_DIR . '/views/form.php', true,
+					[
+						'emails'       => $this->emails,
+						'orderID'      => $orderID,
+						'recipient'    => $this->recipient,
+						'choose_email' => $this->choose_email
+					] );
 			}
 			do_action( 'woo_preview_emails_after_form' );
 		}
