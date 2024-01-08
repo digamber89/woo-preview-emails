@@ -1,5 +1,4 @@
-<script src="<?php echo site_url() . '/wp-includes/js/jquery/jquery.js'; ?>" type="text/javascript"></script>
-<script src="<?php echo $this->plugin_url . '/assets/select2.min.js'; ?>" type="text/javascript"></script>
+<script src="<?php echo $this->plugin_url . '/assets/main.js'; ?>" type="text/javascript"></script>
 <script>
   var toggleResultControls = {
     init: function () {

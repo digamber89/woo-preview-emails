@@ -1,4 +1,4 @@
-<form id="woocommerce-preview-email" action="" method="post">
+<form id="woocommerce-preview-email" action="" method="post" data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
     <table class="form-table">
         <tr>
 			<?php
@@ -17,7 +17,7 @@
         </tr>
         <tr>
 			<?php
-			$args = [
+			$args   = [
 				'posts_per_page' => 10,
 				'post_status'    => array_keys( wc_get_order_statuses() ),
 			];
@@ -29,19 +29,19 @@
                 </label>
             </th>
             <td>
-                <?php if(!empty($orders)): ?>
-                <select name="orderID" id="orderID" class="regular-text">
-                    <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
-					<?php
-					foreach ( $orders as $order ) {
-                        $order_id = $order->get_id()
-						?>
-                        <option value="<?php echo $order_id ?>" <?php selected( $order_id, $this->orderID ); ?> >#order : <?php echo $order_id; ?></option>
-					<?php } ?>
-                </select>
-                <?php else: ?>
-                <?php esc_html_e('There are currently no orders on your site - please add some orders first','woo-preview-emails'); ?>
-                <?php endif; ?>
+				<?php if ( ! empty( $orders ) ): ?>
+                    <select name="orderID" id="orderID" class="regular-text">
+                        <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
+						<?php
+						foreach ( $orders as $order ) {
+							$order_id = $order->get_id()
+							?>
+                            <option value="<?php echo $order_id ?>" <?php selected( $order_id, $this->orderID ); ?> >#order : <?php echo $order_id; ?></option>
+						<?php } ?>
+                    </select>
+				<?php else: ?>
+					<?php esc_html_e( 'There are currently no orders on your site - please add some orders first', 'woo-preview-emails' ); ?>
+				<?php endif; ?>
             </td>
         </tr>
         <tr>
@@ -76,51 +76,3 @@
     </table>
     <p><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>
-<script>
-  (function ($) {
-    var searchForm = {
-      init: function () {
-        this.$form = $('#woocommerce-preview-email')
-        this.$orderSearchField = this.$form.find('#woo_preview_search_orders')
-        this.initAjaxSearch()
-        this.$form.find('#clearEmail').on('click', this.clearEmailField.bind(this))
-      },
-      initAjaxSearch: function () {
-        if (typeof ajaxurl === 'undefined') {
-          ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>"
-        }
-        this.$form.find('#choose_email').select2({ placeholder: 'Choose Email', allowClear: true })
-        this.$form.find('#orderID').select2({ placeholder: 'Choose Order', allowClear: true })
-        this.$orderSearchField.select2({
-          placeholder: 'Search Orders',
-          allowClear: true,
-          ajax: {
-            url: ajaxurl,
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                q: params.term, // search term
-                action: 'woo_preview_orders_search'
-              }
-            },
-            processResults: function (data) {
-              return {
-                results: data
-              }
-            },
-            cache: true
-          },
-          minimumInputLength: 1
-        })
-      },
-      clearEmailField: function (e) {
-        e.preventDefault()
-        this.$form.find('#email').val('')
-      }
-    }
-    $(function () {
-      searchForm.init()
-    })
-  })(jQuery)
-</script>

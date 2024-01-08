@@ -23,22 +23,21 @@ class Main {
 		//generates result
 		add_action( 'admin_init', [ $this, 'email_preview_output' ], 20 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ], 10, 1 );
-		add_action( 'wp_ajax_woo_preview_orders_search', [ $this, 'get_orders' ] );
 		add_filter( 'plugin_action_links_woo-preview-emails/woocommerce-preview-emails.php', [
 			$this,
 			'settings_link'
 		], 20 );
 
-        //HPOS Compatibility
-		add_action( 'before_woocommerce_init', [$this,'hpos_compatible'] );
+		//HPOS Compatibility
+		add_action( 'before_woocommerce_init', [ $this, 'hpos_compatible' ] );
 	}
 
-    //mark as HPOS compatibility
-    public function hpos_compatible() {
-	    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-		    \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WOO_PREVIEW_EMAILS_FILE, true );
-	    }
-    }
+	//mark as HPOS compatibility
+	public function hpos_compatible() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WOO_PREVIEW_EMAILS_FILE, true );
+		}
+	}
 
 	public function settings_link( $links ) {
 		// Build and escape the URL.
@@ -134,25 +133,6 @@ class Main {
 
 	}
 
-	/*Ajax Callback to Search Orders*/
-	public function get_orders() {
-		if ( ! current_user_can( 'manage_woocommerce' ) ) {
-			return false;
-		}
-
-		$q        = sanitize_text_field( filter_input( INPUT_GET, 'q' ) );
-		$response = [];
-		$order    = wc_get_order( $q );
-		if ( $order ) {
-			$id         = $order->get_id();
-			$response[] = [ 'id' => $id, 'text' => '#order :' . $id ];
-
-		}
-		wp_reset_postdata();
-		wp_send_json( $response );
-		die;
-	}
-
 	/**
 	 * load woo preview scripts
 	 *
@@ -162,10 +142,18 @@ class Main {
 		if ( $hook != 'woocommerce_page_codemanas-woocommerce-preview-emails' ) {
 			return;
 		}
-		wp_register_style( 'woo-preview-email-select2-css', $this->plugin_url . '/assets/select2.min.css' );
-		wp_register_script( 'woo-preview-email-select2-js', $this->plugin_url . '/assets/select2.min.js', [ 'jquery' ], '', true );
-		wp_enqueue_style( 'woo-preview-email-select2-css' );
-		wp_enqueue_script( 'woo-preview-email-select2-js' );
+
+		$assets_file = include WOO_PREVIEW_EMAILS_DIR . '/dist/main.asset.php';
+
+
+		wp_register_script( 'woo-preview-emails__main', $this->plugin_url . '/assets/main.js', $assets_file['dependencies'], $assets_file['version'], true );
+		wp_enqueue_script( 'woo-preview-emails__main' );
+
+		wp_register_style( 'woo-preview-emails__vendor', $this->plugin_url . '/assets/main.css', $assets_file['dependencies'], $assets_file['version'] );
+		wp_enqueue_style( 'woo-preview-emails__vendor' );
+
+		wp_register_style( 'woo-preview-emails__style', $this->plugin_url . '/assets/style-main.css', $assets_file['dependencies'], $assets_file['version'] );
+		wp_enqueue_style( 'woo-preview-emails__style' );
 	}
 
 	/**
@@ -242,6 +230,8 @@ class Main {
 		$preview_email = filter_input( INPUT_POST, 'preview_email' );
 		$choose_email  = filter_input( INPUT_POST, 'choose_email' );
 		$order_id      = filter_input( INPUT_POST, 'orderID' );
+		$search_order  = filter_input( INPUT_POST, 'search_order' );
+		$order_id      = ! empty( $search_order ) ? $search_order : $order_id;
 
 		if ( is_admin() && wp_verify_nonce( $preview_email, 'woocommerce_preview_email' ) ):
 			$show_email = false;
@@ -257,7 +247,6 @@ class Main {
 
 			if ( $show_email ) {
 				$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
-
 				/*Make Sure searched order is selected */
 				$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
 				$index           = sanitize_text_field( $_POST['choose_email'] );
@@ -325,7 +314,7 @@ class Main {
 				remove_filter( 'woocommerce_new_order_email_allows_resend', '__return_true', 10 );
 				?>
                 <!DOCTYPE html>
-                <html>
+                <html lang="<?php echo esc_attr(get_locale()); ?>">
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">

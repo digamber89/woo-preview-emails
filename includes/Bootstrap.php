@@ -36,6 +36,7 @@ class Bootstrap {
 	public function init_plugin() {
 		if( self::woocommerce_active_check() ){
 			Main::get_instance();
+			AjaxHandler::get_instance();
 		}
 	}
 
