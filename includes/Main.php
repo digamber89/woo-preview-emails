@@ -205,11 +205,14 @@ class Main {
 		$choose_email  = filter_input( INPUT_POST, 'choose_email' );
 		$order_id      = filter_input( INPUT_POST, 'orderID' );
 		$search_order  = filter_input( INPUT_POST, 'search_order' );
+		$email_type    = filter_input( INPUT_POST, 'email_type' );
+		$email_type    = ! empty( $email_type ) ? $email_type : 'html';
 		$order_id      = ! empty( $search_order ) ? $search_order : $order_id;
 
 		if ( is_admin() && wp_verify_nonce( $preview_email, 'woocommerce_preview_email' ) ):
 			$show_email = false;
-			//need to be called to get shipping and payment gateways data
+
+			//needs to be called to get shipping and payment gateways data
 			WC()->payment_gateways();
 			WC()->shipping();
 
@@ -249,6 +252,8 @@ class Main {
 				// Since WooCommerce 5.0.0 - we require this to make sure emails are resent
 				add_filter( 'woocommerce_new_order_email_allows_resend', '__return_true' );
 				$additional_data = apply_filters( 'woo_preview_additional_orderID', false, $index, $orderID, $current_email );
+
+				//@todo make this more elegant
 				if ( $additional_data ) {
 					do_action( 'woo_preview_additional_order_trigger', $current_email, $additional_data );
 				} else {
@@ -264,7 +269,7 @@ class Main {
 					} elseif ( $index === 'WC_Email_Customer_New_Account' ) {
 						$user_id = get_current_user_id();
 						$current_email->trigger( $user_id );
-					} elseif ( strpos( $index, 'WCS_Email' ) === 0 && class_exists( 'WC_Subscription' ) && is_subclass_of( $current_email, 'WC_Email' ) ) {
+					} elseif ( strpos( $index, 'WCS_Email' ) === 0 && class_exists( 'WC_Subscription' ) && is_subclass_of( $current_email, 'WC_Email' ) && function_exists( 'wcs_get_subscriptions_for_order' ) ) {
 						/* Get the subscriptions for the selected order */
 						$order_subscriptions = wcs_get_subscriptions_for_order( $orderID );
 						if ( ! empty( $order_subscriptions ) && $current_email->id != 'customer_payment_retry' && $current_email->id != 'payment_retry' ) {
@@ -279,9 +284,10 @@ class Main {
 					}
 				}
 
-				$content = $current_email->get_content_html();
+				$content = $email_type == 'html' ? $current_email->get_content_html() : $current_email->get_content_plain();
 				$content = apply_filters( 'woocommerce_mail_content', $current_email->style_inline( $content ) );
-				/*This ends the content for email to be previewed*/
+
+                /*This ends the content for email to be previewed*/
 				/*Loading Toolbar to display for multiple email templates*/
 				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 				remove_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );

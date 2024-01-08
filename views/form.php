@@ -1,5 +1,5 @@
 <?php
-extract($args);
+extract( $args );
 
 ?>
 
@@ -76,6 +76,19 @@ extract($args);
             <td>
                 <input type="email" name="email" id="email" class="regular-text" value="<?php echo $recipient; ?>"/>
                 <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="email_type">
+					<?php _e( 'Email Type', 'woo-preview-emails' ); ?>
+                </label>
+            </th>
+            <td>
+                <select name="email_type" id="email_type">
+                    <option value="html" selected>HTML</option>
+                    <option value="plain-text">Plain/Text</option>
+                </select>
             </td>
         </tr>
     </table>
