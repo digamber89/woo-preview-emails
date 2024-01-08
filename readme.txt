@@ -17,17 +17,14 @@ An Extension for WooCommerce that allows you to Preview Email Templates.
 2. Choose the templates and an Order
 3. A preview of the selected E-mail will be shown
 
-== Installation ==
-
-1. Upload `preview-emails-woocommerce` to the `/wp-content/plugins/` directory
+== Manual Installation ==
+1. Upload `woo-preview-emails` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. You're done go to Preview Emails section in the admin menu and start previewing
 
 == Frequently Asked Questions ==
-
 = Send Test Mails to yourself =
 You can now send test mails, to test on actual devices
-
 *note: If the mail isn't seen in you inbox, please first check your spam folder
 
 == Pro Version ==
