@@ -23,10 +23,7 @@ class Main {
 		//generates result
 		add_action( 'admin_init', [ $this, 'email_preview_output' ], 20 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_scripts' ], 10, 1 );
-		add_filter( 'plugin_action_links_woo-preview-emails/woocommerce-preview-emails.php', [
-			$this,
-			'settings_link'
-		], 20 );
+		add_filter( 'plugin_action_links_woo-preview-emails/woocommerce-preview-emails.php', [ $this, 'settings_link' ], 20 );
 
 		//HPOS Compatibility
 		add_action( 'before_woocommerce_init', [ $this, 'hpos_compatible' ] );
@@ -63,45 +60,9 @@ class Main {
 			$wc_emails = \WC_Emails::instance();
 			$emails    = $wc_emails->get_emails();
 			if ( ! empty( $emails ) ) {
-				//Filtering out booking emails becuase it won't work from this plugin
-				//Buy PRO version if you need this capability
-				$unset_booking_emails = array(
-					'WC_Email_New_Booking',
-					'WC_Email_Booking_Reminder',
-					'WC_Email_Booking_Confirmed',
-					'WC_Email_Booking_Notification',
-					'WC_Email_Booking_Cancelled',
-					'WC_Email_Admin_Booking_Cancelled',
-					'WC_Email_Booking_Pending_Confirmation',
-				);
-
-				//Filtering out subscription emails becuase it won't work from this plugin
-				//Buy PRO version if you need this capability
-				$unset_subscription_emails = array(
-					'WCS_Email_New_Renewal_Order',
-					'WCS_Email_New_Switch_Order',
-					'WCS_Email_Processing_Renewal_Order',
-					'WCS_Email_Completed_Renewal_Order',
-					'WCS_Email_Completed_Switch_Order',
-					'WCS_Email_Customer_Renewal_Invoice',
-					'WCS_Email_Cancelled_Subscription',
-					'WCS_Email_Expired_Subscription',
-					'WCS_Email_On_Hold_Subscription',
-				);
-
-				//Filtering out membership emails becuase it won't work from this plugin
-				//Buy PRO version if you need this capability
-				$unset_membership_emails = array(
-					'WC_Memberships_User_Membership_Note_Email',
-					'WC_Memberships_User_Membership_Ending_Soon_Email',
-					'WC_Memberships_User_Membership_Ended_Email',
-					'WC_Memberships_User_Membership_Renewal_Reminder_Email',
-					'WC_Memberships_User_Membership_Activated_Email',
-				);
-
-				$unset_booking_emails      = apply_filters( 'woo_preview_emails_unset_booking_emails', $unset_booking_emails );
-				$unset_subscription_emails = apply_filters( 'woo_preview_emails_unset_subscription_emails', $unset_subscription_emails );
-				$unset_membership_emails   = apply_filters( 'woo_preview_emails_unset_memebership_emails', $unset_membership_emails );
+				$unset_booking_emails      = apply_filters( 'woo_preview_emails_unset_booking_emails', UnsupportedEmails::unset_booking_emails() );
+				$unset_subscription_emails = apply_filters( 'woo_preview_emails_unset_subscription_emails', UnsupportedEmails::unset_subscription_emails() );
+				$unset_membership_emails   = apply_filters( 'woo_preview_emails_unset_memebership_emails', UnsupportedEmails::unset_membership_emails() );
 
 				if ( ! empty( $unset_booking_emails ) ) {
 					foreach ( $unset_booking_emails as $unset_booking_email ) {
@@ -143,7 +104,7 @@ class Main {
 			return;
 		}
 
-		$assets_file = include WOO_PREVIEW_EMAILS_DIR . '/dist/main.asset.php';
+		$assets_file = include WOO_PREVIEW_EMAILS_DIR . '/assets/main.asset.php';
 
 
 		wp_register_script( 'woo-preview-emails__main', $this->plugin_url . '/assets/main.js', $assets_file['dependencies'], $assets_file['version'], true );
@@ -314,7 +275,7 @@ class Main {
 				remove_filter( 'woocommerce_new_order_email_allows_resend', '__return_true', 10 );
 				?>
                 <!DOCTYPE html>
-                <html lang="<?php echo esc_attr(get_locale()); ?>">
+                <html lang="<?php echo esc_attr( get_locale() ); ?>">
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
