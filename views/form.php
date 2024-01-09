@@ -91,5 +91,5 @@ extract( $args );
             </td>
         </tr>
     </table>
-    <p><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
+    <p style="text-align: left"><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>

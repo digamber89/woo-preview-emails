@@ -39,9 +39,9 @@ import Choices from 'choices.js'
 
     function eventListeners () {
       window.wpe = {}
-      window.wpe.emailChoices = new Choices(DOM.email)
-      window.wpe.chooseOrder = new Choices(DOM.order)
-      window.wpe.orderSearch = new Choices(DOM.orderSearch)
+      window.wpe.emailChoices = new Choices(DOM.email, { removeItemButton: true })
+      window.wpe.chooseOrder = new Choices(DOM.order, { removeItemButton: true })
+      window.wpe.orderSearch = new Choices(DOM.orderSearch, { removeItemButton: true })
 
       DOM.orderSearch.addEventListener('search', function (event) {
         // Only search if user has typed 2 or more characters
