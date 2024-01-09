@@ -6,6 +6,7 @@
 package.json
 package-lock.json
 composer.json
+composer.lock
 .DS_Store
 gulpfile.js
 webpack.config.js
