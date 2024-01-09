@@ -6,7 +6,9 @@ class Main {
 	public static ?Main $instance = null;
 	private $recipient;
 	private string $plugin_url;
-	public $emails = null, $notice_message = null, $notice_class = null;
+	public $emails = null;
+	public $notice_message = null;
+	public $notice_class = null;
 	private string $choose_email;
 
 	/**
@@ -172,16 +174,18 @@ class Main {
 		$this->choose_email = isset( $_POST['choose_email'] ) ? sanitize_text_field( $_POST['choose_email'] ) : '';
 		$orderID            = isset( $_POST['orderID'] ) ? sanitize_text_field( $_POST['orderID'] ) : '';
 		$recipient_email    = isset( $_POST['email'] ) ? sanitize_text_field( $_POST['email'] ) : '';
+		$email_type         = filter_input( INPUT_POST, 'email_type' );
+		$email_type         = ! empty( $email_type ) ? $email_type : 'html';
 
 		if ( is_admin() && isset( $_POST['preview_email'] ) ) {
 			load_template( WOO_PREVIEW_EMAILS_DIR . '/views/form.php', true,
 				[
 					'emails'       => $this->emails,
 					'orderID'      => $orderID,
-					'recipient'    => $this->recipient,
-					'choose_email' => $this->choose_email
+					'recipient'    => $recipient_email,
+					'choose_email' => $this->choose_email,
+					'email_type'   => $email_type,
 				] );
-//			require_once WOO_PREVIEW_EMAILS_DIR . '/views/form.php';
 		} else {
 			do_action( 'woo_preview_emails_before_form' );
 			//Custom tab implementation
@@ -191,8 +195,9 @@ class Main {
 					[
 						'emails'       => $this->emails,
 						'orderID'      => $orderID,
-						'recipient'    => $this->recipient,
-						'choose_email' => $this->choose_email
+						'recipient'    => $recipient_email,
+						'choose_email' => $this->choose_email,
+						'email_type'   => $email_type,
 					] );
 			}
 			do_action( 'woo_preview_emails_after_form' );
@@ -284,10 +289,12 @@ class Main {
 					}
 				}
 
-				$content = $email_type == 'html' ? $current_email->get_content_html() : $current_email->get_content_plain();
-				$content = apply_filters( 'woocommerce_mail_content', $current_email->style_inline( $content ) );
+				//set the type of email:
+				$current_email->email_type = $email_type;
+				$content                   = $current_email->get_content();
+				$content                   = apply_filters( 'woocommerce_mail_content', $current_email->style_inline( $content ) );
 
-                /*This ends the content for email to be previewed*/
+				/*This ends the content for email to be previewed*/
 				/*Loading Toolbar to display for multiple email templates*/
 				/*The Woo Way to Do Things Need Exception Handling Edge Cases*/
 				remove_filter( 'woocommerce_email_recipient_' . $current_email->id, [ $this, 'no_recipient' ] );
@@ -305,12 +312,12 @@ class Main {
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/scripts.php';
 					?>
                 </head>
-                <body class="digthis">
+                <body>
                 <div class="cm-WooPreviewEmail">
                     <div id="tool-options">
                         <div id="tool-wrap">
                             <p>
-                                <strong>Currently Viewing Template File: </strong><br/>
+                                <strong>Viewing Template File: </strong><br/>
 								<?php echo esc_html( $currently_used_template ); ?>
                             </p>
                             <p class="description">
@@ -323,9 +330,7 @@ class Main {
                                href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
                         </div>
                     </div>
-                    <div class="cm-WooPreviewEmail-emailContent">
-						<?php echo $content; ?>
-                    </div>
+                    <div class="cm-WooPreviewEmail-emailContent cm-WooPreviewEmail-emailContent__<?php echo esc_attr( $email_type ); ?>"><?php echo $content; ?></div>
                     <div class="tool-bar-toggler">
                         <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

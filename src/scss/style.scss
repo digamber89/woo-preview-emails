@@ -126,6 +126,9 @@
 
   .cm-WooPreviewEmail-emailContent {
     flex-grow: 1;
+    &__plain{
+      white-space: pre;
+    }
   }
 
   #search-description {

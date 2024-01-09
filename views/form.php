@@ -1,6 +1,5 @@
 <?php
 extract( $args );
-
 ?>
 
 <form id="woocommerce-preview-email" action="" method="post" data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
@@ -86,8 +85,8 @@ extract( $args );
             </th>
             <td>
                 <select name="email_type" id="email_type">
-                    <option value="html" selected>HTML</option>
-                    <option value="plain-text">Plain/Text</option>
+                    <option value="html" <?php selected('html', $email_type) ?>>HTML</option>
+                    <option value="plain" <?php selected('plain', $email_type) ?>>Plain / Text</option>
                 </select>
             </td>
         </tr>
