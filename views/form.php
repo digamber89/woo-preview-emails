@@ -73,7 +73,7 @@ extract( $args );
                 </label>
             </th>
             <td>
-                <input type="email" name="email" id="email" class="regular-text" value="<?php echo $recipient; ?>"/>
+                <input type="email" name="email" id="email" class="regular-text" value="<?php echo esc_attr( $recipient ); ?>"/>
                 <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear"/>
             </td>
         </tr>
