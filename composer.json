@@ -1,0 +1,19 @@
+{
+    "name": "codemanas/woo-preview-emails",
+    "description": "WordPress Plugin to Preview WooCommerce E-mails",
+    "type": "wordpress-plugin",
+    "license": "GPL-2",
+    "autoload": {
+        "psr-4": {
+            "Codemanas\\WooPreviewEmails\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "digamber",
+            "email": "digamberpradhan89@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

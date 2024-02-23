@@ -1,4 +1,8 @@
-<form id="woocommerce-preview-email" action="" method="post">
+<?php
+extract( $args );
+?>
+
+<form id="woocommerce-preview-email" action="" method="post" data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
     <table class="form-table">
         <tr>
 			<?php
@@ -9,19 +13,19 @@
             <td>
                 <select id="choose_email" name="choose_email" class="regular-text">
                     <option value=""><?php _e( 'Choose Email', 'woo-preview-emails' ); ?></option>
-					<?php foreach ( $this->emails as $index => $email ): ?>
-                        <option value="<?php echo $index ?>" <?php selected( $index, $this->choose_email ); ?>><?php echo $email->title; ?></option>
+					<?php foreach ( $emails as $index => $email ): ?>
+                        <option value="<?php echo $index ?>" <?php selected( $index, $choose_email ); ?>><?php echo $email->title; ?></option>
 					<?php endforeach; ?>
                 </select>
             </td>
         </tr>
         <tr>
 			<?php
-			$args = [
-				'post_type'      => 'shop_order',
+			$args   = [
 				'posts_per_page' => 10,
-				'post_status'    => array_keys( wc_get_order_statuses() )
+				'post_status'    => array_keys( wc_get_order_statuses() ),
 			];
+			$orders = wc_get_orders( $args );
 			?>
             <th>
                 <label for="orderID">
@@ -29,21 +33,25 @@
                 </label>
             </th>
             <td>
-                <select name="orderID" id="orderID" class="regular-text">
-                    <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
-					<?php
-					$orders = get_posts( $args );
-					foreach ( $orders as $order ) {
-						?>
-                        <option value="<?php echo $order->ID ?>" <?php selected( $order->ID, $this->orderID ); ?> >#order : <?php echo $order->ID; ?></option>
-					<?php } ?>
-                </select>
+				<?php if ( ! empty( $orders ) ): ?>
+                    <select name="orderID" id="orderID" class="regular-text">
+                        <option value=""><?php _e( 'Choose Order', 'woo-preview-emails' ); ?></option>
+						<?php
+						foreach ( $orders as $order ) {
+							$order_id = $order->get_id()
+							?>
+                            <option value="<?php echo $order_id ?>" <?php selected( $order_id, $orderID ); ?> >#order : <?php echo $order_id; ?></option>
+						<?php } ?>
+                    </select>
+				<?php else: ?>
+					<?php esc_html_e( 'There are currently no orders on your site - please add some orders first', 'woo-preview-emails' ); ?>
+				<?php endif; ?>
             </td>
         </tr>
         <tr>
             <th><label for="woo_preview_search_orders"><?php _e( 'Search Orders', 'woo-preview-emails' ); ?></label></th>
             <td>
-                <select name="search_order" id="woo_preview_search_orders" class="woo_preview_search_orders" class="regular-text" style="width: 35%;">
+                <select name="search_order" id="woo_preview_search_orders" class="regular-text" class="regular-text">
 					<?php
 					if ( ! empty( $_POST['search_order'] ) ) {
 						?>
@@ -56,57 +64,6 @@
                 <p id="search-description" class="description">
 					<?php _e( 'Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90', 'woo-preview-emails' ); ?>
                 </p>
-                <script type="text/javascript">
-                    (function ($) {
-
-                        var searchForm = {
-
-                            init: function () {
-                                this.$form = $('#woocommerce-preview-email');
-                                this.$orderSearchField = this.$form.find('#woo_preview_search_orders');
-                                this.initAjaxSearch();
-                                this.$form.find('#clearEmail').on('click', this.clearEmailField.bind(this))
-
-                            },
-                            initAjaxSearch: function () {
-                                if (typeof ajaxurl === 'undefined') {
-                                    ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
-                                }
-                                this.$orderSearchField.select2({
-                                    placeholder: "Search Orders",
-                                    // data: [{ id:0, text:"something"}, { id:1, text:"something else"}],
-                                    ajax: {
-                                        url: ajaxurl,
-                                        dataType: 'json',
-                                        delay: 250,
-                                        data: function (params) {
-                                            return {
-                                                q: params.term, // search term
-                                                action: 'woo_preview_orders_search'
-                                            };
-                                        },
-                                        processResults: function (data) {
-                                            return {
-                                                results: data
-                                            };
-                                        },
-                                        cache: true
-                                    },
-                                    minimumInputLength: 1
-                                });
-                            },
-                            clearEmailField: function (e) {
-                                e.preventDefault();
-                                this.$form.find('#email').val('');
-                            }
-                        }
-
-                        $(function () {
-                            searchForm.init();
-                        })
-
-                    })(jQuery);
-                </script>
             </td>
         </tr>
         <tr>
@@ -116,10 +73,23 @@
                 </label>
             </th>
             <td>
-                <input type="email" name="email" id="email" class="regular-text" value="<?php echo $this->recipient; ?>"/>
-                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear X"/>
+                <input type="email" name="email" id="email" class="regular-text" value="<?php echo esc_attr( $recipient ); ?>"/>
+                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="email_type">
+					<?php _e( 'Email Type', 'woo-preview-emails' ); ?>
+                </label>
+            </th>
+            <td>
+                <select name="email_type" id="email_type">
+                    <option value="html" <?php selected('html', $email_type) ?>>HTML</option>
+                    <option value="plain" <?php selected('plain', $email_type) ?>>Plain / Text</option>
+                </select>
             </td>
         </tr>
     </table>
-    <p><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
+    <p style="text-align: left"><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>

@@ -1,0 +1,172 @@
+@import 'choices.js/public/assets/styles/choices.css';
+
+.cm-WooPreviewEmail {
+  display: flex;
+  flex-wrap: wrap;
+  transition: 0.8s all;
+
+  .tool-bar-toggler {
+    left: 25%;
+    position: fixed;
+    top: 0;
+    padding: 1em;
+    min-width: 200px;
+    transition: 0.4s all;
+
+    &.hidden {
+      left: 0;
+
+      svg {
+        rotate: 180deg;
+      }
+
+      .show-controls {
+        display: none;
+      }
+    }
+
+    .show-controls,
+    .hide-controls {
+      display: none;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      padding: 0.25em;
+      border: 2px solid #000;
+      border-radius: 50%;
+      stroke-width: 3px;
+      color: #000;
+    }
+
+    a,
+    a:visited {
+      text-decoration: none;
+      color: #646970;
+    }
+
+    a:hover {
+      color: #2271b1;
+    }
+  }
+
+  #tool-options {
+    width: 30%;
+    padding: 2em;
+
+    &.hidden {
+      display: none;
+    }
+
+    #email {
+      max-width: 75%;
+    }
+
+    #clearEmail {
+      padding: 0.15em 1em;
+    }
+
+    select {
+      font-size: 14px;
+      line-height: 2;
+      color: #32373c;
+      border-color: #7e8993;
+      box-shadow: none;
+      border-radius: 3px;
+      padding: 0 24px 0 8px;
+      min-height: 30px;
+      max-width: 25rem;
+      -webkit-appearance: none;
+      background: #fff url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2…%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
+      background-size: 16px 16px;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+
+    .button-primary {
+      background: #007cba;
+      border-color: #007cba;
+      color: #fff;
+      text-decoration: none;
+      text-shadow: none;
+      display: inline-block;
+      font-size: 13px;
+      line-height: 2.15384615;
+      min-height: 30px;
+      margin: 0;
+      padding: 0 10px;
+      cursor: pointer;
+      border-width: 1px;
+      border-style: solid;
+      -webkit-appearance: none;
+      border-radius: 3px;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .regular-text {
+      width: 25em;
+    }
+
+    input[type=date],
+    input[type=datetime-local],
+    input[type=datetime],
+    input[type=email],
+    input[type=month],
+    input[type=number],
+    input[type=password],
+    input[type=search],
+    input[type=tel],
+    input[type=text],
+    input[type=time],
+    input[type=url],
+    input[type=week] {
+      padding: 0 8px;
+      line-height: 2;
+      min-height: 30px;
+      font-size: 14px;
+      width: 25em;
+    }
+  }
+
+  .cm-WooPreviewEmail-emailContent {
+    flex-grow: 1;
+    &__plain{
+      white-space: pre;
+    }
+  }
+
+  #search-description {
+    display: none;
+  }
+
+  #tool-wrap table select,
+  input[type='email'] {
+    width: 100%;
+  }
+
+  #tool-options table th {
+    text-align: left;
+  }
+
+  @media screen and (max-width: 767px) {
+    #tool-options,
+    .cm-WooPreviewEmail-emailContent {
+      width: 100%;
+    }
+  }
+}
+
+.choices[data-type*=select-one] {
+  max-width: 25rem;
+}
+
+.choices__inner{
+  min-height: auto!important;
+  background: #fff;
+}
+
+form#woocommerce-preview-email{
+  label { line-height: 1.5}
+}

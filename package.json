@@ -1,26 +1,21 @@
 {
-  "name": "digthis-plugin-base",
+  "name": "woo-preview-emails",
   "version": "1.0.0",
-  "description": "Plugin assets base",
-  "main": "gulpfile.js",
+  "description": "Plugin for previewing WooCommerce Emails",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/digamber89/New-Plugin-Base.git"
-  },
-  "keywords": [
-    "none"
-  ],
-  "author": "Digamber Pradhan",
+  "author": "codemanas",
   "license": "GPL-2.0-only",
-  "bugs": {
-    "url": "https://github.com/digamber89/New-Plugin-Base/issues"
-  },
-  "homepage": "https://github.com/digamber89/New-Plugin-Base#readme",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-wp-pot": "^2.5.0"
+    "@wordpress/scripts": "^26.18.0"
+  },
+  "dependencies": {
+    "choices.js": "^10.2.0"
   }
 }

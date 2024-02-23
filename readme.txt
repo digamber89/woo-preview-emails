@@ -1,10 +1,10 @@
 === Preview E-mails for WooCommerce ===
 Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
-Requires at least: 3.8
-Tested up to: 5.7
-Requires PHP: 7.0
-Stable tag: 2.0.1
+Requires at least: 6.1.0
+Tested up to: 6.4.0
+Requires PHP: 7.4
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,21 +17,18 @@ An Extension for WooCommerce that allows you to Preview Email Templates.
 2. Choose the templates and an Order
 3. A preview of the selected E-mail will be shown
 
-== Installation ==
-
-1. Upload `preview-emails-woocommerce` to the `/wp-content/plugins/` directory
+== Manual Installation ==
+1. Upload `woo-preview-emails` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. You're done go to Preview Emails section in the admin menu and start previewing
 
 == Frequently Asked Questions ==
-
 = Send Test Mails to yourself =
 You can now send test mails, to test on actual devices
-
 *note: If the mail isn't seen in you inbox, please first check your spam folder
 
 == Pro Version ==
-Looking for integratioin with WooCommerce Bookings and Subscriptions - check out the Pro Add On [Preview E-mails for WooCommerce](https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro/)
+Looking for integration with WooCommerce Bookings and Subscriptions - check out the Pro Add On [Preview E-mails for WooCommerce](https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro/)
 
 == Screenshots ==
 
@@ -42,47 +39,83 @@ Looking for integratioin with WooCommerce Bookings and Subscriptions - check out
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
-=2.0.1=
+= 2.2.2 =
+- Patch: Properly escape output
+
+= 2.2.1 =
+- Language: Updated .pot file
+
+= 2.2.0 =
+- Feature: Ability to choose and preview plain text html
+- Dev: Remove jQuery dependency (moved to choices)
+- Dev: Code refactoring for maintainability
+
+= 2.1.6 =
+Dev: Declare [HPOS compatibility](https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility)
+
+= 2.1.5 =
+- Enhancement: Show 3rd party template locations correctly
+
+= 2.1.4 =
+- Fix: Use get_id instead of directly accessing order id.
+
+= 2.1.3 =
+- Feature: Update for upcoming High-Performance Order Storage(HPOS) compatibility
+
+= 2.1.2 =
+- Feature: Allow Shop manager to get orders by default.
+
+= 2.1.1 = 
+- Added plugin settings page link
+- Some typographic error removed
+
+= 2.1.0 = 
+Redesigned of the setting to be better.
+
+= 2.0.3 =
+Updated changelog to show compatibility with version 2.0.3
+
+= 2.0.1 =
 Sanitize instead of escape when manipulating data
 
-=2.0.0=
+= 2.0.0 =
 Added compatibility to send preview emails with WooCommerce 5.0.0 and greater
 Added ability to clear email input field
 Input sanitization and escaping for order search field
 
-=1.6.8=
+= 1.6.8 =
 Select2 library updated 
 
-=1.6.6=
-Wordpress version and WC version compatibility bump
+= 1.6.6 =
+WordPress version and WC version compatibility bump
 
-=1.6.5=
-Tested upto WooCommerce 4.1.1
+= 1.6.5 =
+- Tested upto WooCommerce 4.1.1
 
-=1.6.4=
-Testec upto WooCommerce 4.0.0
+= 1.6.4 =
+- Tested upto WooCommerce 4.0.0
 
-=1.6.3=
-Enhancement - E-mail instructions should show up for - order with Payment gateways
+= 1.6.3 =
+- Enhancement - E-mail instructions should show up for - order with Payment gateways
 
-=1.6.2=
-Compatibility update for Pro Add-on for subscription product
+= 1.6.2 =
+- Compatibility update for Pro Add-on for subscription product
 
-=1.6.1=
-Show full path for template file instead.
+= 1.6.1 =
+- Show full path for template file instead.
 
-=1.6.0=
-Code refactoring and UI and UX changes
+= 1.6.0 =
+- Code refactoring and UI and UX changes
 
-=1.5.4=
+= 1.5.4 =
 Correction for untranslated Submit Button
 
-=1.5.3=
+= 1.5.3 =
 - Minor Condition checkings added
 - Removed Email options which is not supported resulting in error generation.
 - Version Bump
 
-=1.5.2=
+= 1.5.2 =
 Compatible with WooCommerce 3.7.1
 
 = 1.5.1 =
