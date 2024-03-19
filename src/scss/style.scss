@@ -4,6 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   transition: 0.8s all;
+  font-family: "Helvetica", Sans-serif, serif;
 
   .tool-bar-toggler {
     left: 25%;
@@ -34,10 +35,10 @@
       width: 20px;
       height: 20px;
       padding: 0.25em;
-      border: 2px solid #000;
+      border: 2px solid #ccc;
       border-radius: 50%;
       stroke-width: 3px;
-      color: #000;
+      color: #ccc;
     }
 
     a,
