@@ -39,6 +39,9 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+= 2.2.3 =
+- Enhancement: If background color is dark, the form fields weren't showing up.
+
 = 2.2.2 =
 - Patch: Properly escape output
 
