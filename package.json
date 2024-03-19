@@ -13,7 +13,7 @@
   "author": "codemanas",
   "license": "GPL-2.0-only",
   "devDependencies": {
-    "@wordpress/scripts": "^26.18.0"
+    "@wordpress/scripts": "^27.4.0"
   },
   "dependencies": {
     "choices.js": "^10.2.0"
