@@ -4,9 +4,9 @@ namespace Codemanas\WooPreviewEmails;
 
 class Main {
 	public static ?Main $instance = null;
-	private $recipient;
+	private string $recipient;
 	private string $plugin_url;
-	public $emails = null;
+	public$emails = null;
 	public $notice_message = null;
 	public $notice_class = null;
 	private string $choose_email;
@@ -166,6 +166,7 @@ class Main {
                 </div>
 			<?php } ?>
 			<?php $this->generate_form(); ?>
+            <?php include_once WOO_PREVIEW_EMAILS_DIR.'/views/promotions.php'?>
         </div>
 		<?php
 	}
