@@ -2,9 +2,9 @@
 Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
 Requires at least: 6.1.0
-Tested up to: 6.4.0
+Tested up to: 6.5.0
 Requires PHP: 7.4
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,10 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 5. Send emails to yourself to check on other devices
 
 == Changelog ==
+= 2.2.5 =
+- Misc: Added Promo section
+- Dev: Update stable tag to 6.5
+
 = 2.2.4 =
 - Stable tag was not updated.
 
