@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
         with:
-          node-version: '16' # Adjust depending on your Node.js version
+          node-version: '20' # Adjust depending on your Node.js version
 
       - name: Install NPM dependencies and Build assets
         run: |
