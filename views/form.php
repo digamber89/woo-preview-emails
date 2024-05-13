@@ -69,7 +69,7 @@ $orders = wc_get_orders( $args );
             </div>
             <div class="cm-woo-preview-emails-form__input-field cm-woo-preview-emails-form__input-field--select-mail">
                 <input type="email" name="email" id="email" class="regular-text" value="<?php echo esc_attr( $recipient ); ?>"/>
-                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-primary" value="Clear"/>
+                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-secondary"  value="Clear"/>
             </div>
         </div>
         <div class="cm-woo-preview-emails-form__input-wrapper">

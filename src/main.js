@@ -9,6 +9,8 @@ import Choices from 'choices.js'
       email: '#choose_email',
       order: '#orderID',
       orderSearch: '#woo_preview_search_orders',
+      sendMailTo: '#email',
+      clearSendMailTo: '#clearEmail',
     }
 
     function cacheDOM () {
@@ -16,6 +18,8 @@ import Choices from 'choices.js'
       DOM.order = DOM.container.querySelector(selectors.order)
       DOM.orderSearch = DOM.container.querySelector(selectors.orderSearch)
       DOM.ajaxURL = DOM.container.getAttribute('data-url')
+      DOM.sendMailTo = DOM.container.querySelector(selectors.sendMailTo)
+      DOM.clearSendMailTo = DOM.container.querySelector(selectors.clearSendMailTo)
     }
 
     function searchOrders (query) {
@@ -38,6 +42,7 @@ import Choices from 'choices.js'
     }
 
     function eventListeners () {
+      //wpe = woo preview emails
       window.wpe = {}
       window.wpe.emailChoices = new Choices(DOM.email, { removeItemButton: true })
       window.wpe.chooseOrder = new Choices(DOM.order, { removeItemButton: true })
@@ -48,6 +53,10 @@ import Choices from 'choices.js'
         if (event.detail.value.length >= 2) {
           searchOrders(event.detail.value)
         }
+      })
+
+      DOM.clearSendMailTo.addEventListener('click', function(){
+        DOM.sendMailTo.value = ''
       })
 
     }
@@ -63,5 +72,4 @@ import Choices from 'choices.js'
   }
 
   document.addEventListener('DOMContentLoaded', previewEmails)
-
 })()

@@ -53,6 +53,7 @@
 
   #tool-options {
     width: 30%;
+    height: 100vh;
     padding: 2em;
     background: #fff;
 
@@ -80,6 +81,25 @@
       white-space: nowrap;
       box-sizing: border-box;
     }
+
+    .button-secondary {
+      color: #2271b1;
+      border-color: #2271b1;
+      background: #f6f7f7;
+      vertical-align: top;
+      border: 1px solid;
+      border-radius: 5px;
+    }
+    //design needed for preview page only
+    #email{
+      padding: 0.75em;
+    }
+  }
+
+  #tool-wrap {
+    p {
+      text-align: left;
+    }
   }
 
   .cm-WooPreviewEmail-emailContent {
@@ -98,15 +118,6 @@
   }
 }
 
-.choices[data-type*=select-one] {
-  max-width: 25rem;
-}
-
-.choices__inner {
-  min-height: auto !important;
-  background: #fff;
-}
-
 form#woocommerce-preview-email {
   label {
     line-height: 1.5
@@ -115,6 +126,18 @@ form#woocommerce-preview-email {
 
 .cm-woo-preview-emails-form {
   margin-top: 1em;
+
+  .description {
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .choices__inner {
+    min-height: auto !important;
+    background: #fff;
+    box-sizing: border-box;
+  }
+
   &__input-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -125,16 +148,43 @@ form#woocommerce-preview-email {
 
   &__label {
     width: 100px;
+    text-align: left;
   }
 
   &__input-field {
     width: 350px;
-    &--select-mail{
-        display: flex;
+    text-align: left;
+
+    &--select-mail {
+      display: flex;
+      gap: 0.25em;
+
+      #email {
+        flex-grow: 1;
+        border: 1px solid #ddd;
+      }
     }
   }
 
   label {
-    font-weight: bold;
+    font-weight: normal;
+  }
+
+  select {
+    font-size: 14px;
+    line-height: 2; /* 28px */
+    color: #2c3338;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    border-radius: 3px;
+    padding: 0 24px 0 8px;
+    min-height: 30px;
+    max-width: 25rem;
+    -webkit-appearance: none;
+    /* The SVG is arrow-down-alt2 from Dashicons. */
+    background: #fff url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E') no-repeat right 5px top 55%;
+    background-size: 16px 16px;
+    cursor: pointer;
+    vertical-align: middle;
   }
 }
