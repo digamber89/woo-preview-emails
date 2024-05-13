@@ -2,7 +2,7 @@
 	.cm-woo-preview-emails-promo{
         margin-top: 50px;
 		background: #fff;
-		padding: 1em;
+		padding: 1em 2em;
         border-radius: 20px;
         max-width: 1200px;
 	}
