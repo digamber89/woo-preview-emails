@@ -149,20 +149,12 @@ class Main {
 			<?php
 			if ( ! in_array( 'woo-preview-emails-pro-addon/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				?>
-                <div id="message" class="notice notice-warning">
+                <div id="message" class="notice notice-success is-dismissible">
                     <h3>Need more features ?</h3>
                     <p>
                         <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the
                             pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription
                         templates.</p>
-                </div>
-                <div id="message" class="notice notice-warning">
-                    <p>If you have found this plugin useful, please leave a <a
-                                href="https://wordpress.org/support/plugin/woo-preview-emails/reviews/#new-post"
-                                target="_blank">review</a>
-                    <p>
-                        <strong><?php _e( "Note: E-mails require orders to exist before you can preview them", 'woo-preview-emails' ); ?></strong>
-                    </p>
                 </div>
 			<?php } ?>
 			<?php $this->generate_form(); ?>
