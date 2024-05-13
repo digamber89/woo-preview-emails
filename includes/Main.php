@@ -309,6 +309,11 @@ class Main {
                 <div class="cm-WooPreviewEmail">
                     <div id="tool-options">
                         <div id="tool-wrap">
+                            <div style="text-align: left">
+                                <a class="button"
+                                   style="text-align: left"
+                                   href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><< <?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
+                            </div>
                             <p>
                                 <strong>Viewing Template File: </strong><br/>
 								<?php echo esc_html( $currently_used_template ); ?>
@@ -318,9 +323,6 @@ class Main {
 								<?php echo $current_email->description; ?>
                             </p>
 							<?php $this->generate_form(); ?>
-                            <!-- admin url was broken -->
-                            <a class="button"
-                               href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
                         </div>
                     </div>
                     <div class="cm-WooPreviewEmail-emailContent cm-WooPreviewEmail-emailContent__<?php echo esc_attr( $email_type ); ?>"><?php echo $content; ?></div>

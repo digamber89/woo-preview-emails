@@ -69,7 +69,7 @@ $orders = wc_get_orders( $args );
             </div>
             <div class="cm-woo-preview-emails-form__input-field cm-woo-preview-emails-form__input-field--select-mail">
                 <input type="email" name="email" id="email" class="regular-text" value="<?php echo esc_attr( $recipient ); ?>"/>
-                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-secondary"  value="Clear"/>
+                <input type="button" title="clear" alt="clear" name="clearEmail" id="clearEmail" class="clearEmail button button-secondary" value="Clear"/>
             </div>
         </div>
         <div class="cm-woo-preview-emails-form__input-wrapper">
@@ -83,5 +83,6 @@ $orders = wc_get_orders( $args );
             </div>
         </div>
     </div>
-    <p style="text-align: left"><input type="submit" name="submit" value="<?php _e( 'Submit', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
+	<?php do_action( 'woo_preview_emails_addition_form_fields', $args, $orders ); ?>
+    <p style="text-align: left"><input type="submit" name="submit" value="<?php _e( 'Preview', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>
