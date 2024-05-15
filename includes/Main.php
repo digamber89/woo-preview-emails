@@ -147,10 +147,10 @@ class Main {
         <div class="wrap">
             <h2>Woo Preview Emails</h2>
 			<?php
-			if ( ! in_array( 'woo-preview-emails-pro-addon/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+			if ( ! in_array( 'woo-preview-emails-pro/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				?>
                 <div id="message" class="notice notice-success is-dismissible">
-                    <h3>Need more features ?</h3>
+                    <h3><?php _e('Need more features','woo-preview-emails'); ?> ?</h3>
                     <p>
                         <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the
                             pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription
