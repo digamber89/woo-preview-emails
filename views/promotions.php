@@ -1,7 +1,6 @@
 <style>
     .cm-woo-preview-emails-promo {
         margin-top: 50px;
-        max-width: 1200px;
     }
 
     .cm-woo-preview-emails-promo--list {
@@ -17,6 +16,10 @@
         background: #fff;
         padding: 2.5em;
         border-radius: 1em;
+    }
+    .cm-woo-preview-emails-promo__list-item-image img{
+        width: 55px;
+        height: 55px;
     }
     .cm-woo-preview-emails-promo__list-item-content h3{
         margin-top:0;
@@ -34,6 +37,18 @@
                 <h3>Typesense Search for WooCommerce</h3>
                 <p>Create a fast search experience for your site. Give your users a search listing page or autocomplete search.</p>
                 <a href="https://www.codemanas.com/downloads/typesense-search-for-woocommerce/" class="button button-primary" target="_blank" rel="noopener">
+                    Learn More
+                </a>
+            </div>
+        </li>
+        <li class="cm-woo-preview-emails-promo--list-item">
+            <div class="cm-woo-preview-emails-promo__list-item-image">
+                <img src="<?php echo esc_url( plugins_url( '/images/cm-blocks.png', WOO_PREVIEW_EMAILS_FILE ) ); ?>" alt="Search with Typesense"/>
+            </div>
+            <div class="cm-woo-preview-emails-promo__list-item-content">
+                <h3>CM Blocks</h3>
+                <p>The hassle-free and robust WordPress plugin designed to streamline your site-building experience.</p>
+                <a href="https://www.codemanas.com/downloads/zoom-meetings-for-woocommerce/" class="button button-primary" target="_blank" rel="noopener">
                     Learn More
                 </a>
             </div>
