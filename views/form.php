@@ -6,7 +6,6 @@ $args   = [
 ];
 $orders = wc_get_orders( $args );
 ?>
-
 <form id="woocommerce-preview-email" action="" method="post" data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
 	<?php wp_nonce_field( 'woocommerce_preview_email', 'preview_email' ); ?>
     <div class="cm-woo-preview-emails-form">

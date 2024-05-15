@@ -143,9 +143,20 @@ class Main {
 	}
 
 	public function generate_the_admin_page() {
+        $icon = plugins_url('/images/wpe.png',WOO_PREVIEW_EMAILS_FILE);
 		?>
         <div class="wrap">
-            <h2>Woo Preview Emails</h2>
+            <style>
+                .woo-preview-emails-header{
+                    display: flex;
+                    align-items: center;
+                    gap: 1em;
+                }
+            </style>
+            <div class="woo-preview-emails-header">
+                <img src="<?php echo esc_url($icon); ?>" alt="Woo Preview Emails" width="60px" height="60px" />
+                <h2>Woo Preview Emails</h2>
+            </div>
 			<?php
 			if ( ! in_array( 'woo-preview-emails-pro/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				?>
