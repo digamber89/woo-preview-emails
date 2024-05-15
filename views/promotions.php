@@ -48,7 +48,7 @@
             <div class="cm-woo-preview-emails-promo__list-item-content">
                 <h3>CM Blocks</h3>
                 <p>The hassle-free and robust WordPress plugin designed to streamline your site-building experience.</p>
-                <a href="https://www.codemanas.com/downloads/zoom-meetings-for-woocommerce/" class="button button-primary" target="_blank" rel="noopener">
+                <a href="https://wordpress.org/plugins/cm-blocks/" class="button button-primary" target="_blank" rel="noopener">
                     Learn More
                 </a>
             </div>
