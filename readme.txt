@@ -32,11 +32,9 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 
 == Screenshots ==
 
-1. Menu Location
-2. Preview Order E-mails
-3. Preview User E-mails
-4. Example
-5. Send emails to yourself to check on other devices
+1. Basic View
+2. Preview View
+3. Preview Distraction Free Mode
 
 == Changelog ==
 = 2.2.9 =
