@@ -6,7 +6,7 @@ class Main {
 	public static ?Main $instance = null;
 	private string $recipient;
 	private string $plugin_url;
-	public$emails = null;
+	public $emails = null;
 	public $notice_message = null;
 	public $notice_class = null;
 	private string $choose_email;
@@ -143,25 +143,32 @@ class Main {
 	}
 
 	public function generate_the_admin_page() {
-        $icon = plugins_url('/images/wpe.png',WOO_PREVIEW_EMAILS_FILE);
+		$icon = plugins_url( '/images/wpe.png', WOO_PREVIEW_EMAILS_FILE );
 		?>
         <div class="wrap">
+            <h2 style="display:none">Placeholder to show messages</h2>
             <style>
-                .woo-preview-emails-header{
+                .woo-preview-emails-header {
                     display: flex;
                     align-items: center;
                     gap: 1em;
+                    flex-wrap: wrap;
+                }
+
+                .woo-preview-emails-header #message,
+                .woo-preview-emails-header .notice {
+                    width: 100%;
                 }
             </style>
             <div class="woo-preview-emails-header">
-                <img src="<?php echo esc_url($icon); ?>" alt="Woo Preview Emails" width="60px" height="60px" />
+                <img src="<?php echo esc_url( $icon ); ?>" alt="Woo Preview Emails" width="60px" height="60px"/>
                 <h2>Woo Preview Emails</h2>
             </div>
 			<?php
 			if ( ! in_array( 'woo-preview-emails-pro/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				?>
                 <div id="message" class="notice notice-success is-dismissible">
-                    <h3><?php _e('Need more features','woo-preview-emails'); ?> ?</h3>
+                    <h3><?php _e( 'Need more features', 'woo-preview-emails' ); ?> ?</h3>
                     <p>
                         <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the
                             pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription
@@ -169,7 +176,7 @@ class Main {
                 </div>
 			<?php } ?>
 			<?php $this->generate_form(); ?>
-            <?php include_once WOO_PREVIEW_EMAILS_DIR.'/views/promotions.php'?>
+			<?php include_once WOO_PREVIEW_EMAILS_DIR . '/views/promotions.php' ?>
         </div>
 		<?php
 	}
