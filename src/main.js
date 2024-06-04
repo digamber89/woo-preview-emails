@@ -44,7 +44,7 @@ import Choices from 'choices.js'
       //wpe = woo preview emails
       window.wpe = {}
       window.wpe.emailChoices = new Choices(DOM.email, { removeItemButton: true })
-      window.wpe.chooseOrder = new Choices(DOM.order, { removeItemButton: true })
+      window.wpe.chooseOrder = new Choices(DOM.order, { removeItemButton: true, shouldSort: false })
       window.wpe.orderSearch = new Choices(DOM.orderSearch, { removeItemButton: true })
 
       DOM.orderSearch.addEventListener('search', function (event) {

@@ -37,6 +37,10 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 3. Preview Distraction Free Mode
 
 == Changelog ==
+= 2.2.11 =
+- Fix: Don't show refund orders in order listing / only show type shop_order in order listing
+- Fix: Show Orders in reverse descending order
+
 = 2.2.10 =
 - Misc: Update read me to show the updated screenshots.
 - Fix: WordPress notices design correction after 2.2.9 update
