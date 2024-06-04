@@ -27,7 +27,6 @@ import Choices from 'choices.js'
       let signal = controller.signal
       let formData = new FormData()
       formData.append('query', query)
-      console.log(DOM.ajaxURL)
       return fetch(DOM.ajaxURL + '?action=woo_preview_orders_search', {
         method: 'POST',
         body: formData,
