@@ -1,9 +1,14 @@
 <?php
 extract( $args );
-$args   = [
+$args = [
 	'posts_per_page' => 10,
-	'post_status'    => array_keys( wc_get_order_statuses() ),
 ];
+$type = wc_get_order_types( 'view-orders' );
+if ( is_array( $type ) ) {
+	$type         = array_diff( $type, [ 'shop_order_refund' ] );
+	$args['type'] = $type;
+}
+
 $orders = wc_get_orders( $args );
 ?>
 <form id="woocommerce-preview-email" action="" method="post" data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
