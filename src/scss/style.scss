@@ -54,9 +54,9 @@
 
   #tool-options {
     width: 30%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 2em;
-    background: #fff;
+    background: #f5f5f5;
 
     &.hidden {
       display: none;
@@ -148,7 +148,8 @@ form#woocommerce-preview-email {
   }
 
   &__label {
-    width: 100px;
+    min-width: 150px;
+    width: auto;
     text-align: left;
   }
 

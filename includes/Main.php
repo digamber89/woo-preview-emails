@@ -239,11 +239,13 @@ class Main {
 			}
 
 			if ( $show_email ) {
+				do_action( 'woo_preview_emails_before_email_render', $_POST );
 				$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
 				/*Make Sure searched order is selected */
 				$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
 				$index           = sanitize_text_field( $_POST['choose_email'] );
 				$recipient_email = sanitize_text_field( $_POST['email'] );
+
 
 				if ( is_email( $recipient_email ) ) {
 					$this->recipient = $recipient_email;
