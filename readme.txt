@@ -4,7 +4,7 @@ Tags: WooCommerce, Emails, Preview
 Requires at least: 6.1.0
 Tested up to: 6.5.3
 Requires PHP: 7.4
-Stable tag: 2.2.10
+Stable tag: 2.2.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 3. Preview Distraction Free Mode
 
 == Changelog ==
+= 2.2.12 =
+ Rollback: Searching not working if orders are split between two tables full explanation [see here](https://www.digamberpradhan.com/)
+
 = 2.2.11 =
 - Fix: Don't show refund orders in order listing / only show type shop_order in order listing
 - Fix: Show Orders in reverse descending order
