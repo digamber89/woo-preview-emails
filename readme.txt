@@ -39,6 +39,7 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 == Changelog ==
 = 2.2.13 =
 Change hook from plugin_loaded to plugins_loaded.
+
 = 2.2.12 =
  Rollback: Searching not working if orders are split between two tables full explanation [see here](https://www.digamberpradhan.com/)
 
