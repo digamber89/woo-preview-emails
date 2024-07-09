@@ -11,7 +11,7 @@ class Bootstrap {
 
 	public function __construct() {
 		$this->load_dependencies();
-		add_action( 'plugin_loaded', [ $this, 'init_plugin' ] );
+		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 		add_action( 'init', [ $this, 'load_text_domain' ] );
 	}
 
