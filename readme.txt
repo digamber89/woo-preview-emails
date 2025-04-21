@@ -2,9 +2,9 @@
 Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
 Requires at least: 6.1.0
-Tested up to: 6.5.5
+Tested up to: 6.8.0
 Requires PHP: 7.4
-Stable tag: 2.2.13
+Stable tag: 2.2.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 3. Preview Distraction Free Mode
 
 == Changelog ==
+= 2.2.14 =
+Updated tested upto : WP 6.8,
+
 = 2.2.13 =
 Change hook from plugin_loaded to plugins_loaded.
 
