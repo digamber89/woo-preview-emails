@@ -25,15 +25,21 @@ jobs:
           composer dump-autoload -o
 
 
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: '20' # Adjust depending on your Node.js version
+          cache: 'pnpm'
 
-      - name: Install NPM dependencies and Build assets
+      - name: Install PNPM dependencies and Build assets
         run: |
-          npm install
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm run build
 
 
       - name: WordPress Plugin Deploy
