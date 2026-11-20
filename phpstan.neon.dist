@@ -1,0 +1,13 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    phpVersion: 80200
+    level: 1
+    paths:
+        - woocommerce-preview-emails.php
+        - includes
+        - views
+    bootstrapFiles:
+        - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+        - phpstan-bootstrap.php
