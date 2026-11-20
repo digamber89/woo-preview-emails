@@ -5,15 +5,14 @@
 /src
 /node_modules
 package.json
-package-lock.json
 pnpm-lock.yaml
 composer.json
 composer.lock
 phpstan-bootstrap.php
 phpstan.neon.dist
 .DS_Store
-gulpfile.js
 webpack.config.js
+pnpm-workspace.yaml
 
 .distignore
 .gitignore
