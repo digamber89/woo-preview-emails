@@ -7,7 +7,9 @@ Author: Digamber Pradhan
 Author URI: https://digamberpradhan.com/
 Version: 2.2.15
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
-WC requires at least: 3.0.0
+WC requires at least: 8.0.0
+Requires at least: 6.8
+Requires PHP:      8.3
 WC tested up to: 11.1.2
 Text Domain: woo-preview-emails
 Domain Path: /languages

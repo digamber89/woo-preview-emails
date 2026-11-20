@@ -21,8 +21,8 @@ jobs:
 
       - name: Install Composer dependencies and dump autoload
         run: |
-          composer install --prefer-dist --no-progress --no-suggest
-          composer dump-autoload -o
+          composer install --no-dev --prefer-dist --no-progress --no-suggest
+          composer dump-autoload --no-dev -o
 
 
       - name: Setup PNPM

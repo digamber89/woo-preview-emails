@@ -1,4 +1,5 @@
-<script src="<?php echo $this->plugin_url . '/assets/main.js'; ?>" type="text/javascript"></script>
+<?php /** @var string $plugin_url */ ?>
+<script src="<?php echo $plugin_url . '/assets/main.js'; ?>" type="text/javascript"></script>
 <script>
   var toggleResultControls = {
     init: function () {

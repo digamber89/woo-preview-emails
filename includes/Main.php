@@ -6,7 +6,7 @@ class Main {
 	public static ?Main $instance = null;
 	private string $recipient;
 	private string $plugin_url;
-	public $emails = null;
+	public $emails = [];
 	public $notice_message = null;
 	public $notice_class = null;
 	private string $choose_email;
@@ -238,13 +238,13 @@ class Main {
 				$show_email = true;
 			}
 
-			if ( $show_email ) {
+			if ( $show_email && isset( $this->emails[ $choose_email ] ) ) {
 				do_action( 'woo_preview_emails_before_email_render', $_POST );
 				$this->plugin_url = plugins_url( '', WOO_PREVIEW_EMAILS_FILE );
 				/*Make Sure searched order is selected */
-				$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : $_POST['orderID'] );
+				$orderID         = absint( ! empty( $_POST['search_order'] ) ? $_POST['search_order'] : ( $_POST['orderID'] ?? 0 ) );
 				$index           = sanitize_text_field( $_POST['choose_email'] );
-				$recipient_email = sanitize_text_field( $_POST['email'] );
+				$recipient_email = sanitize_text_field( $_POST['email'] ?? '' );
 
 
 				if ( is_email( $recipient_email ) ) {
@@ -321,6 +321,7 @@ class Main {
                     <title><?php _e( 'Previewing Emails', 'woo-preview-emails' ); ?></title>
 					<?php
 					/*Load the styles and scripts*/
+					$plugin_url = $this->plugin_url;
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/style.php';
 					require_once WOO_PREVIEW_EMAILS_DIR . '/views/result/scripts.php';
 					?>

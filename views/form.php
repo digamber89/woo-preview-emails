@@ -1,5 +1,10 @@
 <?php
-extract( $args );
+/** @var array $args */
+$emails       = $args['emails'];
+$orderID      = $args['orderID'];
+$recipient    = $args['recipient'];
+$choose_email = $args['choose_email'];
+$email_type   = $args['email_type'];
 $args = [
 	'posts_per_page' => 10,
 ];
