@@ -111,10 +111,6 @@ class Main {
 
 		wp_register_script( 'woo-preview-emails__main', $this->plugin_url . '/assets/main.js', $assets_file['dependencies'], $assets_file['version'], true );
 		wp_enqueue_script( 'woo-preview-emails__main' );
-
-		wp_register_style( 'woo-preview-emails__vendor', $this->plugin_url . '/assets/main.css', $assets_file['dependencies'], $assets_file['version'] );
-		wp_enqueue_style( 'woo-preview-emails__vendor' );
-
 		wp_register_style( 'woo-preview-emails__style', $this->plugin_url . '/assets/style-main.css', $assets_file['dependencies'], $assets_file['version'] );
 		wp_enqueue_style( 'woo-preview-emails__style' );
 	}
@@ -226,6 +222,9 @@ class Main {
 		$order_id      = ! empty( $search_order ) ? $search_order : $order_id;
 
 		if ( is_admin() && wp_verify_nonce( $preview_email, 'woocommerce_preview_email' ) ):
+			if ( ! current_user_can( apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ) ) ) {
+				wp_die( esc_html__( 'Sorry, you are not allowed to preview emails.', 'woo-preview-emails' ), '', [ 'response' => 403 ] );
+			}
 			$show_email = false;
 
 			//needs to be called to get shipping and payment gateways data
@@ -333,7 +332,7 @@ class Main {
                             <div style="text-align: left">
                                 <a class="button"
                                    style="text-align: left"
-                                   href="<?php echo admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ); ?>"><< <?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
+                                   href="<?php echo esc_url( admin_url( 'admin.php?page=codemanas-woocommerce-preview-emails' ) ); ?>"><< <?php _e( 'Back to Admin Area', 'woo-preview-emails' ); ?></a>
                             </div>
                             <p>
                                 <strong>Viewing Template File: </strong><br/>
@@ -341,7 +340,7 @@ class Main {
                             </p>
                             <p class="description">
                                 <strong> Description: </strong>
-								<?php echo $current_email->description; ?>
+								<?php echo wp_kses_post( $current_email->description ); ?>
                             </p>
 							<?php $this->generate_form(); ?>
                         </div>

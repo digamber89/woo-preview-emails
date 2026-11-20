@@ -8,7 +8,7 @@ namespace Codemanas\WooPreviewEmails;
  * The AjaxHandler class is responsible for handling AJAX requests in WordPress.
  */
 class AjaxHandler {
-	private static $_instance = null;
+	private static mixed $_instance = null;
 
 	public static function get_instance() {
 		return ( self::$_instance == null ) ? self::$_instance = new self() : self::$_instance;
@@ -19,7 +19,7 @@ class AjaxHandler {
 	}
 
 	public function get_orders() {
-		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+		if ( ! current_user_can( apply_filters( 'woo_preview_emails_min_capability', 'manage_options' ) ) ) {
 			return false;
 		}
 

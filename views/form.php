@@ -25,7 +25,7 @@ $orders = wc_get_orders( $args );
                 <select id="choose_email" name="choose_email" class="regular-text">
                     <option value=""><?php _e( 'Choose Email', 'woo-preview-emails' ); ?></option>
 					<?php foreach ( $emails as $index => $email ): ?>
-                        <option value="<?php echo $index ?>" <?php selected( $index, $choose_email ); ?>><?php echo $email->title; ?></option>
+                        <option value="<?php echo esc_attr( $index ); ?>" <?php selected( $index, $choose_email ); ?>><?php echo esc_html( $email->title ); ?></option>
 					<?php endforeach; ?>
                 </select>
             </div>
@@ -42,7 +42,7 @@ $orders = wc_get_orders( $args );
 						foreach ( $orders as $order ) {
 							$order_id = $order->get_id()
 							?>
-                            <option value="<?php echo $order_id ?>" <?php selected( $order_id, $orderID ); ?> >#order : <?php echo $order_id; ?></option>
+                            <option value="<?php echo esc_attr( $order_id ); ?>" <?php selected( $order_id, $orderID ); ?> >#order : <?php echo esc_html( $order_id ); ?></option>
 						<?php } ?>
                     </select>
 				<?php else: ?>
@@ -59,7 +59,7 @@ $orders = wc_get_orders( $args );
 					<?php
 					if ( ! empty( $_POST['search_order'] ) ) {
 						?>
-                        <option value="<?php echo esc_attr( $_POST['search_order'] ); ?>" selected="selected">#order : <?php echo esc_attr( $_POST['search_order'] ); ?></option>
+                        <option value="<?php echo esc_attr( wp_unslash( $_POST['search_order'] ) ); ?>" selected="selected">#order : <?php echo esc_html( wp_unslash( $_POST['search_order'] ) ); ?></option>
 						<?php
 					}
 					?>
@@ -93,5 +93,5 @@ $orders = wc_get_orders( $args );
         </div>
     </div>
 	<?php do_action( 'woo_preview_emails_addition_form_fields', $args, $orders ); ?>
-    <p style="text-align: left"><input type="submit" name="submit" value="<?php _e( 'Preview', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
+    <p style="text-align: left"><input type="submit" name="submit" value="<?php esc_attr_e( 'Preview', 'woo-preview-emails' ) ?>" class="button button-primary"></p>
 </form>

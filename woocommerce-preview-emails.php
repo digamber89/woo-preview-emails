@@ -9,7 +9,7 @@ Version: 2.2.16
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 WC requires at least: 8.0.0
 Requires at least: 6.8
-Requires PHP:      8.3
+Requires PHP:      8.2
 WC tested up to: 11.1.2
 Text Domain: woo-preview-emails
 Domain Path: /languages

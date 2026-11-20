@@ -1,6 +1,7 @@
 /.wordpress-org
 /.git
 /.github
+/.agents
 /src
 /node_modules
 package.json
