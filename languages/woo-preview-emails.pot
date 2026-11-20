@@ -2,14 +2,14 @@
 # This file is distributed under the http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html.
 msgid ""
 msgstr ""
-"Project-Id-Version: Preview E-mails for WooCommerce 2.2.15\n"
+"Project-Id-Version: Preview E-mails for WooCommerce 2.2.17\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-preview-emails\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-01T09:42:07+00:00\n"
+"POT-Creation-Date: 2026-11-20T07:38:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: woo-preview-emails\n"
@@ -39,53 +39,81 @@ msgstr ""
 msgid "https://digamberpradhan.com/"
 msgstr ""
 
-#: includes/Main.php:138
+#: includes/Main.php:51
+msgid "Settings"
+msgstr ""
+
+#: includes/Main.php:136
 msgid "Preview Emails"
 msgstr ""
 
-#: includes/Main.php:171
+#: includes/Main.php:169
 msgid "Need more features"
 msgstr ""
 
-#: includes/Main.php:321
-msgid "Previewing Emails"
+#: includes/Main.php:232
+msgid "Sorry, you are not allowed to preview emails."
 msgstr ""
 
-#: includes/Main.php:335
-msgid "Back to Admin Area"
+#: includes/Main.php:390
+msgid "Please specify both Order and Email"
 msgstr ""
 
-#: views/form.php:18
-#: views/form.php:21
+#: views/form.php:26
+#: views/form.php:29
 msgid "Choose Email"
 msgstr ""
 
-#: views/form.php:30
-#: views/form.php:35
+#: views/form.php:38
+#: views/form.php:43
 msgid "Choose Order"
 msgstr ""
 
-#: views/form.php:44
+#: views/form.php:52
 msgid "There are currently no orders on your site - please add some orders first"
 msgstr ""
 
-#: views/form.php:50
-#: views/form.php:61
+#: views/form.php:58
+#: views/form.php:69
 msgid "Search Orders"
 msgstr ""
 
-#: views/form.php:65
+#: views/form.php:73
 msgid "Only use this field if you have particular orders, that are not listed above in the Choose Order Field. Type the Order ID only. Example: 90"
 msgstr ""
 
-#: views/form.php:71
+#: views/form.php:79
 msgid "Mail to"
 msgstr ""
 
-#: views/form.php:80
+#: views/form.php:88
 msgid "Email Type"
 msgstr ""
 
-#: views/form.php:91
+#: views/form.php:99
 msgid "Preview"
+msgstr ""
+
+#: views/result/preview.php:28
+msgid "Previewing Emails"
+msgstr ""
+
+#: views/result/preview.php:46
+msgid "Back to Admin Area"
+msgstr ""
+
+#: views/result/preview.php:49
+msgid "Viewing Template File:"
+msgstr ""
+
+#: views/result/preview.php:53
+msgid "Description:"
+msgstr ""
+
+#: views/result/preview.php:66
+msgid "Hide Controls"
+msgstr ""
+
+#: views/result/preview.php:67
+msgid "Show Controls"
 msgstr ""

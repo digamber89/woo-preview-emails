@@ -48,7 +48,7 @@ class Main {
 			get_admin_url() . 'admin.php'
 		) );
 		// Create the link.
-		$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+		$settings_link = "<a href='$url'>" . __( 'Settings','woo-preview-emails' ) . '</a>';
 		// Adds the link to the end of the array.
 		array_unshift( $links, $settings_link );
 
