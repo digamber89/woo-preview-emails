@@ -1,10 +1,10 @@
 === Preview E-mails for WooCommerce ===
 Contributors: digamberpradhan, codemanas
 Tags: WooCommerce, Emails, Preview
-Requires at least: 6.1.0
-Tested up to: 7.1.2
-Requires PHP: 8.3
-Stable tag: 2.2.16
+Requires at least: 6.8.0
+Tested up to: 7.1
+Requires PHP: 8.2
+Stable tag: 2.2.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,10 @@ Looking for integration with WooCommerce Bookings and Subscriptions - check out 
 3. Preview Distraction Free Mode
 
 == Changelog ==
+= 2.2.17 = 2026-11-20
+* Feature: Distinguish between admin and customer emails.
+* Dev: Minimum PHP version bumped to 8.2.
+* Dev: Refactor and Sanitize all outputs.
 = 2.2.16 =
 - Fix: Handle missing preview selections, orders, and recipients safely.
 

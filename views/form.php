@@ -5,10 +5,10 @@ $orderID      = $args['orderID'];
 $recipient    = $args['recipient'];
 $choose_email = $args['choose_email'];
 $email_type   = $args['email_type'];
-$args = [
+$args         = [
 	'posts_per_page' => 10,
 ];
-$type = wc_get_order_types( 'view-orders' );
+$type         = wc_get_order_types( 'view-orders' );
 if ( is_array( $type ) ) {
 	$type         = array_diff( $type, [ 'shop_order_refund' ] );
 	$args['type'] = $type;
@@ -25,7 +25,7 @@ $orders = wc_get_orders( $args );
                 <select id="choose_email" name="choose_email" class="regular-text">
                     <option value=""><?php _e( 'Choose Email', 'woo-preview-emails' ); ?></option>
 					<?php foreach ( $emails as $index => $email ): ?>
-                        <option value="<?php echo esc_attr( $index ); ?>" <?php selected( $index, $choose_email ); ?>><?php echo esc_html( $email->title ); ?></option>
+                        <option value="<?php echo esc_attr( $index ); ?>" <?php selected( $index, $choose_email ); ?>><?php echo esc_html( $email->title ); ?> - <?php echo esc_html( $email->is_customer_email() ? 'customer' : 'admin' ); ?></option>
 					<?php endforeach; ?>
                 </select>
             </div>
