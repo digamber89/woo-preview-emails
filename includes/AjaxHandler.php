@@ -2,6 +2,8 @@
 
 namespace Codemanas\WooPreviewEmails;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Class AjaxHandler
  *

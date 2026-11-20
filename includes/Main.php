@@ -2,6 +2,8 @@
 
 namespace Codemanas\WooPreviewEmails;
 
+defined( 'ABSPATH' ) || exit;
+
 class Main {
 	public static ?Main $instance = null;
 	private string $recipient = '';
@@ -120,7 +122,7 @@ class Main {
 	 * @return void'
 	 */
 	public function adminNotices(): void { ?>
-        <div class="<?php echo $this->notice_class; ?>"><p><?php echo $this->notice_message; ?></p></div>
+        <div class="<?php echo esc_attr( $this->notice_class ); ?>"><p><?php echo esc_html( $this->notice_message ); ?></p></div>
 		<?php
 	}
 
@@ -164,7 +166,7 @@ class Main {
 			if ( ! in_array( 'woo-preview-emails-pro/woo-preview-emails-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				?>
                 <div id="message" class="notice notice-success is-dismissible">
-                    <h3><?php _e( 'Need more features', 'woo-preview-emails' ); ?> ?</h3>
+                    <h3><?php esc_html_e( 'Need more features', 'woo-preview-emails' ); ?> ?</h3>
                     <p>
                         <a href="https://www.codemanas.com/downloads/preview-e-mails-for-woocommerce-pro">Check out the
                             pro version here</a> which lets you view WooCommerce Booking and WooCommerce Subscription

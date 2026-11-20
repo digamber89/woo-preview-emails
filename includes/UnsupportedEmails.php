@@ -2,6 +2,8 @@
 
 namespace Codemanas\WooPreviewEmails;
 
+defined( 'ABSPATH' ) || exit;
+
 class UnsupportedEmails {
 
 	public static function unset_booking_emails() {

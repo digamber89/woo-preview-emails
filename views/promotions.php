@@ -1,3 +1,6 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <style>
     .cm-woo-preview-emails-promo {
         margin-top: 50px;

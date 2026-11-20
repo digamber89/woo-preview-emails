@@ -5,6 +5,8 @@
  * @var array $args
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /** @var \WC_Email $current_email */
 $current_email           = $args['current_email'];
 /** @var string $currently_used_template */
@@ -54,7 +56,7 @@ $plugin_url              = $args['plugin_url'];
 			<?php $main->generate_form(); ?>
         </div>
     </div>
-    <div class="cm-WooPreviewEmail-emailContent cm-WooPreviewEmail-emailContent__<?php echo esc_attr( $email_type ); ?>"><?php echo $content; ?></div>
+    <div class="cm-WooPreviewEmail-emailContent cm-WooPreviewEmail-emailContent__<?php echo esc_attr( $email_type ); ?>"><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
     <div class="tool-bar-toggler">
         <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

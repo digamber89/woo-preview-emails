@@ -2,6 +2,8 @@
 
 namespace Codemanas\WooPreviewEmails;
 
+defined( 'ABSPATH' ) || exit;
+
 class Bootstrap {
 	public static ?Bootstrap $instance = null;
 	private static $active_plugins;
